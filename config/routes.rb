@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+  resources :rentals, only: [:new, :create, :edit]
+  get '/account' => 'users#show'
   get "/categories" => "categories#index"
   get "/products" => "products#index"
   get "/admin" => "pages#admin"
