@@ -1,6 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<h1>New category</h1>
 
-<%= render @category %>
+<%= render "form", category: @category %>
+
+<br>
 
 <div>
   <%= link_to "Back to categories", categories_path %>

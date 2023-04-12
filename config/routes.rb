@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   root "products#index"
 
-  get "/categories" => "categories#show"
+  get "/categories" => "categories#index"
   get "/admin" => "pages#admin"
   get "/home" => "pages#home"
 
