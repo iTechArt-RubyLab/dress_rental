@@ -15,7 +15,7 @@
             <% if !user_signed_in? %><%= link_to 'Sign up', new_user_registration_path %><% end %>
           </li>
           <li>
-            <% if current_user %><a class="nav-link p-link" href="/account">Account</a><% end %>
+            <% if current_user %><%= link_to 'Account', user_path(current_user.id) %><% end %>
           </li>
           <li>
             <% if !user_signed_in? %>

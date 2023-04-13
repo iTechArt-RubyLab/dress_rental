@@ -8,20 +8,14 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-  resources :rentals, only: [:new, :create, :edit]
-  get '/account' => 'users#show'
-  get "/categories" => "categories#index"
-  get "/products" => "products#index"
-  get "/admin" => "pages#admin"
-  get "/home" => "pages#home"
-  get "/login" => "categories#index"
-  get "/sign_up" => "registrations#new"
+  resources :users, only: %i[show]
+  resources :rentals, only: %i[new create edit update show destroy]
 
-  resources :products, only: [:index, :show]
-  resources :categories, only: [:show]
+  resources :products, only: %i[index show]
+  resources :categories, only: %i[index show]
 
   namespace :admin do
-    resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :products, only: %i[index new create edit update destroy]
+    resources :categories, only: %i[index new create edit update destroy]
   end
 end

@@ -1,0 +1,16 @@
+<h1>Current rental</h1>
+
+<%= render @rental %>
+
+<div>
+  <p>
+    <%= link_to "Edit this rental", [:edit, @rental] %>
+  </p>
+
+ <p> 
+  <%= link_to 'Delete this rental', destroy_rental_path, :method => :destroy %>
+  </p>
+
+    <%= link_to 'Back to rentals', user_path(current_user.id) %>
+  </p>
+</div>

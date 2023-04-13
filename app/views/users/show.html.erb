@@ -8,7 +8,7 @@
       <ul>
         <% @user.rentals.each do |rental| %>
           <li>
-          <%= link_to "#{rental.product.product_name} from #{rental.start_date} to #{rental.end_date}", rental.product %>
+          <%= link_to "#{rental.product.product_name} from #{rental.start_date} to #{rental.end_date}", [rental] %>
         </li>
       <% end %>
     </ul><br>
