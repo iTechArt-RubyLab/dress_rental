@@ -7,10 +7,11 @@
     <%= link_to "Edit this rental", [:edit, @rental] %>
   </p>
 
- <p> 
-  <%= link_to 'Delete this rental', destroy_rental_path, :method => :destroy %>
+  <p> 
+    <%= link_to 'Delete this rental', rental_path(@rental), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
   </p>
 
+  <p> 
     <%= link_to 'Back to rentals', user_path(current_user.id) %>
   </p>
 </div>

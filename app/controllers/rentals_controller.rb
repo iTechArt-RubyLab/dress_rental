@@ -1,5 +1,5 @@
 class RentalsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create], notice: 'You must sign in first!'
+  before_action :authenticate_user!, only: %i[new create]
 
   def new
     @rental = Rental.new
@@ -12,7 +12,7 @@ class RentalsController < ApplicationController
   def create
     @rental = Rental.new(rental_params.merge(user_id: current_user.id))
     @product = @rental.product
-    if @rental.valid? && @rental.valid_date && @rental.duplicate_rental != true
+    if @rental.valid?
       @rental.save
       redirect_to @rental
     else
@@ -33,7 +33,7 @@ class RentalsController < ApplicationController
   def update
     @rental = Rental.find_by_id(params[:id])
     @rental.assign_attributes(rental_params)
-    if @rental.valid? && @rental.valid_date && @rental.duplicate_rental != true
+    if @rental.valid?
       @rental.save
       redirect_to @rental
     else
