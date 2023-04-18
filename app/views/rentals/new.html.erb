@@ -1,7 +1,7 @@
 <h1>Create a New Rental</h1>
 
 <%= form_for @rental do |f| %>
-  <%= f.collection_select :product_id, Product.all, :id, :product_name%><br><br>
+  <%= f.collection_select :product_id, Product.all, :id, :name%><br><br>
 
   <%= f.label :start_date, "Pick Start dates" %>
   <%= f.date_field :start_date, min: Date.today %><br><br>
