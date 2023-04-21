@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admins
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -13,10 +12,4 @@ Rails.application.routes.draw do
 
   resources :products, only: %i[index show]
   resources :categories, only: %i[index show]
-
-  namespace :admin do
-    resources :products, only: %i[index new create edit update destroy]
-    resources :categories, only: %i[index new create edit update destroy]
-  end
 end
-

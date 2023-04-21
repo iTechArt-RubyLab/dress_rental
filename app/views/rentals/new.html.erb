@@ -1,5 +1,7 @@
 <h1>Create a New Rental</h1>
 
+<%= render "layouts/flash" %>
+
 <%= form_for @rental do |f| %>
   <%= f.collection_select :product_id, Product.all, :id, :name%><br><br>
 

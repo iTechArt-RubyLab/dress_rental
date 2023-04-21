@@ -2,32 +2,18 @@ class Rental < ApplicationRecord
   belongs_to :user
   belongs_to :product
 
-  def valid_date
-    self.start_date < self.end_date
-  end
+  validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
+  validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
+  validate :product_available
 
-  def duplicate_rental
-    Rental.all.each do |rental|
-      if rental.id != self.id
-        if rental.product_id == self.product_id
-          if self.start_date <= rental.end_date && self.start_date >= rental.start_date || self.end_date <= rental.end_date && self.end_date >= rental.start_date
-            return true
-          end
-        end
-      end
+  private
+
+  def product_available
+    if Rental.where(product_id: product.id)
+              .where.not(id: id)
+              .where("(start_date, end_date) OVERLAPS (?, ?)", start_date, end_date)
+              .exists?
+      errors.add(:base, "Product with code #{product.id} is already booked for this period")
     end
-  end
-
-  def return_available_dates
-    Rental.all.each do |rental|
-      if self.start_date <= rental.end_date && self.start_date >= rental.start_date || self.end_date <= rental.end_date && self.end_date >= rental.start_date
-          return "This product is not available between #{rental.start_date} and #{rental.end_date}. Choose another time! Thanks."
-      end
-    end
-  end
-
-  def revenue
-    "#{(self.end_date - self.start_date).to_i * self.price} $)"
   end
 end
-
