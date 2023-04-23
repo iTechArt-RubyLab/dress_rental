@@ -1,0 +1,19 @@
+<h1>Edit this rental</h1>
+
+<h3><%=@rental.product.name%> from <%= @rental.start_date %> to <%= @rental.end_date %> </h3>
+
+<%= form_for @rental do |f| %>
+
+  <%= f.collection_select :product_id, Product.all, :id, :name%><br><br>
+
+  <%= f.label :start_date, "Start" %>
+  <%= f.date_field :start_date %><br>
+
+  <%= f.label :end_date, "End" %>
+  <%= f.date_field :end_date %><br>
+
+  <%=f.submit %>
+<% end %>
+
+
+<br><br>
