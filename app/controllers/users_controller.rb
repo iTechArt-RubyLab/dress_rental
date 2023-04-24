@@ -18,6 +18,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserMailer.email_confirmation(@user).deliver_now
+        flash[:notice] = "Please confirm your email address to activate your account"
+        redirect_to root_path
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -25,6 +28,18 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm_email
+    user = User.find_by_email_confirmation_token(params[:id])
+    if user.present?
+      user.email_confirmed_at = Time.zone.now
+      user.email_confirmation_token = nil
+      flash[:success] = "Thank you! Your email has been confirmed."
+    else
+      flash[:error] = "Sorry, User not found"
+    end
+    redirect_to root_path
   end
 
   def update
@@ -55,6 +70,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :phone_number, :password)
+    params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation)
   end
 end
