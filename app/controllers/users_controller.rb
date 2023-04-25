@@ -30,18 +30,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def confirm_email
-    user = User.find_by_email_confirmation_token(params[:id])
-    if user.present?
-      user.email_confirmed_at = Time.zone.now
-      user.email_confirmation_token = nil
-      flash[:success] = "Thank you! Your email has been confirmed."
-    else
-      flash[:error] = "Sorry, User not found"
-    end
-    redirect_to root_path
-  end
-
   def update
     respond_to do |format|
       if @user.update(user_params)

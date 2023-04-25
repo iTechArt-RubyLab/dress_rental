@@ -1,5 +1,5 @@
-<h2>Подтвердите свой электронный адрес</h2>
+<h2>Dear <%= @email %>, please confirm your email address</h2>
 
-<p>Добро пожаловать на сервис аренды праздничных нарядов, <%= @email %>! Перед тем, как начать пользоваться аккаунтом, мы просим вас подтвердить свой электронный адрес, перейдя по ссылке ниже</p>
+<p>Welcome to our dress rental service, <%= @email %>! Before you continue exploring our products, please, confirm your email address to activate your account by clicking the link below. Thank you very much!</p>
 
-<div><a class="button" href="<%= confirmation_url(@resource, confirmation_token: @token) %>">Подтвердить мой аккаунт</a></div>
+<div><a class="button" href="<%= confirmation_url(@resource, confirmation_token: @token) %>">Activate my account</a></div>
