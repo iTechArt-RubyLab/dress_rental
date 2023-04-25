@@ -1,0 +1,10 @@
+<h1>Salons</h1>
+
+<div>
+  <% @salons.each do |salon| %>
+    <%= render salon %>
+    <p>
+      <%= link_to "Explore this salon's products", salon %>
+    </p>
+  <% end %>
+</div>

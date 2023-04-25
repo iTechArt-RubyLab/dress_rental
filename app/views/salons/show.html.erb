@@ -1,0 +1,8 @@
+<%= render @salon %>
+
+<h2>This salon offers these products:</h2>
+<ul>
+  <% @salon.products.each do |product| %>
+    <li><%= link_to "#{product.name}", product %></li>
+  <% end %>
+</ul>
