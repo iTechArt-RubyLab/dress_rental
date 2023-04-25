@@ -20,7 +20,6 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.email_confirmation(@user).deliver_now
         flash[:notice] = "Please confirm your email address to activate your account"
-        redirect_to root_path
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
