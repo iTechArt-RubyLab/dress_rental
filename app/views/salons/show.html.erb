@@ -14,7 +14,11 @@
       <div>
         <p><strong><%= comment.user.email %></strong></p>
         <p><%= comment.content %></p>
-         <%= link_to "delete", salon_comment_path(@salon, comment), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} if current_user == comment.user %>
+      
+        <% if current_user == comment.user %>
+          <%= link_to 'Edit', edit_salon_comment_path(@salon, comment) %>
+          <%= link_to 'Delete', salon_comment_path(@salon, comment), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+        <% end %>
       </div>
     <% end %>
   <% else %>

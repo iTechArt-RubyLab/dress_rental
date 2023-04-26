@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_salon, only: %i[create destroy]
+  before_action :set_salon, only: %i[create edit update destroy]
 
   def create
     @comment = @salon.comments.build(comment_params)
@@ -12,6 +12,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @salon.comments.find(params[:id])
     @comment.destroy
+    redirect_to @salon
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = @salon.comments.find(params[:id])
+    flash.now[:notice] = 'Could not update the comment!' unless @comment.update(comment_params)
     redirect_to @salon
   end
 
