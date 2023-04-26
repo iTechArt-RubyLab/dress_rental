@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+  resources :salons, only: %i[index show] do
+    resources :comments, only: %i[create edit update destroy]
+  end
+
   resources :users, only: %i[show]
   resources :rentals, only: %i[new create edit update show destroy]
 
