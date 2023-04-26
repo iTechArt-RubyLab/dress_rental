@@ -6,3 +6,33 @@
     <li><%= link_to "#{product.name}", product %></li>
   <% end %>
 </ul>
+
+
+<div class="comment-section">
+  <h2>Comments</h2>
+  <% if @salon.comments.any? %>
+    <% @salon.comments.each do |comment| %>
+      <div class="comment">
+        <p><strong><%= comment.user.email %></strong></p>
+        <p><%= comment.content %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No comments yet.</p>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <div class="add-comment">
+    <%= form_for [@salon, Comment.new] do |f| %>
+      <div class="form-group">
+        <%= f.label :content, "Leave a comment" %><br>
+        <%= f.text_area :content, rows: "3", class: "form-control" %>
+      </div>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% else %>
+  <p>You need to <%= link_to "sign in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to leave a comment.</p>
+<% end %>
+

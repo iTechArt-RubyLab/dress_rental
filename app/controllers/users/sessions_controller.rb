@@ -11,9 +11,8 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def create
-    user = User.find(params[:email])
-
-    if user.valid_password?(params[:password])
+    user = User.find_by(email: params[:user][:email])
+    if user.valid_password?(params[:user][:password])
       if user.confirmed?
         sign_in(user)
       else
@@ -22,7 +21,6 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to root_path
     else
       flash[:error] = "Invalid email or password"
-      render :new
     end
   end
 end
