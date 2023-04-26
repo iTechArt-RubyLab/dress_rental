@@ -4,16 +4,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @salon.comments.build(comment_params)
-    if current_user
-      @comment.user = current_user
-      if @comment.save
-        redirect_to @salon, notice: 'Comment added'
-      else
-        redirect_to @salon, alert: 'Could not save the comment'
-      end
-    else
-      redirect_to new_user_session_path
-    end
+    @comment.user = current_user
+    flash.now[:notice] = 'Could not save the comment!' unless @comment.save
+    redirect_to @salon
   end
 
   def destroy
