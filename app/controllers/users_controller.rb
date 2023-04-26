@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        UserMailer.email_confirmation(@user).deliver_now
+        flash[:notice] = "Please confirm your email address to activate your account"
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -55,6 +57,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :phone_number, :password)
+    params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation)
   end
 end

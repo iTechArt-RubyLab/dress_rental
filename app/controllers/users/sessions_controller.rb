@@ -9,4 +9,20 @@ class Users::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource_or_scope)
     stored_location_for(resource_or_scope) || root_path
   end
+
+  def create
+    user = User.find(params[:email])
+
+    if user.valid_password?(params[:password])
+      if user.confirmed?
+        sign_in(user)
+      else
+        flash[:error] = "Your account is not yet confirmed"
+      end
+      redirect_to root_path
+    else
+      flash[:error] = "Invalid email or password"
+      render :new
+    end
+  end
 end
