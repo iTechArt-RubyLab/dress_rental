@@ -1,0 +1,23 @@
+<h1>Rentals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Salon</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>User email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rentals.each do |rental| %>
+      <tr>
+        <td><%= rental.product.name %></td>
+        <td>
+        <%= rental.product.salon.name %></td>
+        <td><%= rental.start_date %></td>
+        <td><%= rental.end_date %></td>
+        <td><%= rental.user.email %></td>
+      </tr>
+    <% end %>

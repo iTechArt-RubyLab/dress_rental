@@ -15,6 +15,12 @@
             <%= link_to 'Salons', salons_path %>
           </li>
           <li>
+            <% if current_user && current_user.admin? %><%= link_to 'Rentals',  admin_rentals_path %><% end %>
+          </li>
+          <li>
+           <% if current_user && current_user.admin? %><%= link_to 'Users', admin_users_path %><% end %>
+           </li>
+          <li>
             <% if !user_signed_in? %><%= link_to 'Sign up', new_user_registration_path %><% end %>
           </li>
           <li>

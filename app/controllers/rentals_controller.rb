@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
-  before_action :set_rental, only: %i[ show update destroy ]
+  before_action :set_rental, only: %i[show update destroy]
 
   def new
     @rental = Rental.new
