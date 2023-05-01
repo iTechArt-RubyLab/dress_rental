@@ -1,9 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
-
-  def index
-    @users = User.all
-  end
+  before_action :set_user, only: %i[show edit update destroy]
 
   def show; end
 
@@ -21,32 +17,19 @@ class UsersController < ApplicationController
         UserMailer.email_confirmation(@user).deliver_now
         flash[:notice] = "Please confirm your email address to activate your account"
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
+    if current_user.update(user_params)
+      flash[:success] = "Your profile has been updated."
+      redirect_to edit_user_path(current_user)
+    else
+      render :edit
+      flash.now[:error] = "There was a problem updating your profile."
     end
   end
 
@@ -57,6 +40,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation, :role, :avatar)
   end
 end

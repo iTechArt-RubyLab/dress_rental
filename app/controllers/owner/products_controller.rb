@@ -1,5 +1,5 @@
-module Admin
-  class ProductsController < AdminController
+module Owner
+  class ProductsController < ApplicationController
     before_action :set_product, only: %i[show edit update destroy]
 
     def new
@@ -9,16 +9,19 @@ module Admin
     def edit; end
 
     def create
-      @product = Product.new(product_params)
-
-      respond_to do |format|
-        if @product.save
-          format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-          format.json { render :show, status: :created, location: @product }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @product.errors, status: :unprocessable_entity }
+      if current_user.owned_salons.include?(@salon)
+        @product = Product.new(product_params)
+        respond_to do |format|
+          if @product.save
+            format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+            format.json { render :show, status: :created, location: @product }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @product.errors, status: :unprocessable_entity }
+          end
         end
+      else
+        redirect_to @salon, alert: "You don't have permission to add products to this salon."
       end
     end
 

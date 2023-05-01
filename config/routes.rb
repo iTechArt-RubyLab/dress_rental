@@ -8,21 +8,35 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+  namespace :admin do
+    resources :users, only: %i[index edit update destroy] do
+      post 'confirm_owner', on: :member
+    end
+    resources :categories, only: %i[new create edit update destroy]
+    resources :products, only: %i[new create edit update destroy]
+    resources :salons, only: %i[new create edit update destroy]
+    resources :comments, only: %i[create edit update destroy]
+    resources :rentals, only: %i[index new create edit update destroy]
+  end
+
+  namespace :owner do
+    resources :categories, only: %i[new create edit update destroy]
+    resources :products, only: %i[new create edit update destroy]
+    resources :salons, only: %i[new create edit update destroy]
+    resources :comments, only: %i[create edit update destroy]
+    resources :rentals, only: %i[new create edit update destroy]
+  end
+
+  namespace :user do
+    resources :comments, only: %i[create edit update destroy]
+    # resources :rentals, only: %i[new create edit update destroy] !!!
+  end
+
   resources :salons, only: %i[index show] do
     resources :comments, only: %i[create edit update destroy]
   end
-  resources :users, only: %i[show]
-
-  namespace :admin do
-    resources :users, only: %i[index edit update]
-    resources :categories, only: %i[edit update]
-    resources :products, only: %i[new create edit update destroy]
-    resources :comments, only: %i[create edit update destroy]
-    resources :rentals, only: %i[index]
-  end
-
-  resources :rentals, only: %i[new create edit update show destroy]
-
   resources :products, only: %i[index show]
   resources :categories, only: %i[index show]
+  resources :users, only: %i[show edit update]
+  resources :rentals, only: %i[show new create edit update destroy]
 end
