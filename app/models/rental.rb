@@ -6,6 +6,12 @@ class Rental < ApplicationRecord
   validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
   validate :product_available
 
+  def total_price
+    (end_date - start_date + 1).to_i * product.price
+  end
+  
+  private
+
   def product_available
     if Rental.where(product_id: product.id)
               .where.not(id: id)
@@ -13,9 +19,5 @@ class Rental < ApplicationRecord
               .exists?
       errors.add(:base, "Product with code #{product.id} is already booked for this period")
     end
-  end
-
-  def total_price
-    (end_date - start_date + 1).to_i * product.price
   end
 end
