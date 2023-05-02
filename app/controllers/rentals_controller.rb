@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
-  before_action :set_rental, only: %i[show update destroy]
+  before_action :set_rental, only: %i[show edit update destroy]
 
   def new
     @rental = Rental.new
@@ -19,7 +19,7 @@ class RentalsController < ApplicationController
   end
 
   def edit
-    @rental = Rental.find(params[:id])
+    render "rentals/_edit"
   end
 
   def update

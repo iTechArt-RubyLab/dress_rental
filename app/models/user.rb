@@ -19,13 +19,9 @@ class User < ApplicationRecord
     end
   end
 
-  # def set_default_role
-  #   self.role ||= Role.find_by_name('user')
-  # end
-
-  def avatar_url(style = :thumb)
+  def avatar_url
     if avatar.attached?
-      avatar.variant(resize_to_fill: [100, 100])
+      avatar
     else
       'default-avatar.png'
     end
