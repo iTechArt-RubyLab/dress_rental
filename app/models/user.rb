@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :products, through: :rentals
   has_many :comments
   has_one_attached :avatar
+  has_many :salons, class_name: 'Salon', foreign_key: 'owner_id', dependent: :destroy
 
   enum role_type: { user: 1, admin: 2, owner: 3 }
 
@@ -17,6 +18,10 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
     end
+  end
+
+  def owned_salons
+    self.salons
   end
 
   def avatar_url
