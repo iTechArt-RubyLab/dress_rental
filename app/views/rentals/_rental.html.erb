@@ -12,3 +12,8 @@
   <strong>End date:</strong>
   <%= rental.end_date %>
 </p>
+
+<p>
+ <strong>Price:</strong>
+    <%= number_to_currency(@rental.total_price) %>
+</p>
