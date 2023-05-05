@@ -8,12 +8,15 @@ module Admin
 
     def show; end
 
-    def edit; end
+    def edit
+      render 'shared/users/edit'
+    end
 
     def update
+      @current_user = current_user
       if @user.update(user_params)
-        flash.now[:success] = 'Profile successfully updated.'
-        redirect_to edit_user_path(current_user)
+        flash.now[:notice] = 'Profile successfully updated.'
+        redirect_to edit_user_path(@user)
       else
         render :edit
         flash.now[:error] = 'Could not save the changes.'

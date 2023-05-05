@@ -2,6 +2,10 @@
 
 <%= render 'form', salon: @salon %>
 
+<% if current_user&.admin? %>
+  <p><%= link_to 'Add new product',  new_admin_salon_product_path(@salon) %></p>
+<% end %>
+
 <div>
   <%= link_to "Back to salons", salons_path %>
 </div>

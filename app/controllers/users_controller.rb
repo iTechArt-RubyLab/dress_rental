@@ -3,34 +3,23 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def new
-    @user = User.new
-  end
-
-  def edit; end
-
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        UserMailer.email_confirmation(@user).deliver_now
-        flash[:notice] = "Please confirm your email address to activate your account"
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+  def edit
+    render 'shared/users/edit'
   end
 
   def update
     if current_user.update(user_params)
-      flash[:success] = "Your profile has been updated."
+      flash[:notice] = "Profile has been updated."
       redirect_to edit_user_path(current_user)
     else
       render :edit
-      flash.now[:error] = "There was a problem updating your profile."
+      flash.now[:error] = "There was a problem updating the profile."
     end
+  end
+
+  def request_owner_access
+    UserMailer.request_owner_access(current_user).deliver_now
+    redirect_to user_path(current_user)
   end
 
   private

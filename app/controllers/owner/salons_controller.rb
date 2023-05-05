@@ -1,5 +1,5 @@
-module Admin
-  class SalonsController < AdminController
+module Owner
+  class SalonsController < OwnerController
     before_action :set_salon, only: %i[edit update destroy]
 
     def new

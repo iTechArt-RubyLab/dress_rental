@@ -14,7 +14,7 @@ class RentalsController < ApplicationController
       redirect_to @rental
     else
       redirect_to new_rental_path
-      flash[:message] = @rental.errors.full_messages.join("\n")
+      flash[:alert] = @rental.errors.full_messages.join("\n")
     end
   end
 
@@ -28,7 +28,7 @@ class RentalsController < ApplicationController
       redirect_to @rental
     else
       redirect_to edit_rental_path
-      flash[:message] = @rental.errors.full_messages.join("\n")
+      flash[:alert] = @rental.errors.full_messages.join("\n")
     end
   end
 

@@ -11,7 +11,7 @@ module Admin
 
       respond_to do |format|
         if @category.save
-          format.html { redirect_to category_path(@category), notice: "Product was successfully created." }
+          format.html { redirect_to category_path(@category), notice: "Category was successfully created." }
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -22,7 +22,7 @@ module Admin
 
     def update
       if @category.update(category_params)
-        flash.now[:success] = 'Category successfully updated.'
+        flash.now[:notice] = 'Category successfully updated.'
         redirect_to @category
       else
         render :edit

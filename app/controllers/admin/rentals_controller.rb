@@ -18,7 +18,7 @@ module Admin
         redirect_to @rental
       else
         redirect_to new_rental_path
-        flash[:message] = @rental.errors.full_messages.join("\n")
+        flash[:alert] = @rental.errors.full_messages.join("\n")
       end
     end
 
@@ -32,13 +32,15 @@ module Admin
         redirect_to @rental
       else
         redirect_to edit_rental_path
-        flash[:message] = @rental.errors.full_messages.join("\n")
+        flash[:alert] = @rental.errors.full_messages.join("\n")
       end
     end
 
     def destroy
       @rental.destroy
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to admin_rentals_path, notice: 'Rental was successfully destroyed' }
+      end
     end
 
     private

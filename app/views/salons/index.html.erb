@@ -1,5 +1,12 @@
 <h1>Salons</h1>
 
+<% if current_user&.admin? %>
+  <h3><%= link_to 'Create new salon', new_admin_salon_path %></h3>
+<% elsif current_user&.owner? %>
+  <h3><%= link_to 'Create new salon', new_owner_salon_path %></h3>
+<% end %>
+
+
 <div>
   <% @salons.each do |salon| %>
     <%= render salon %>
@@ -8,6 +15,7 @@
     </p>
          <% if current_user&.admin? %>
      <p><%= link_to 'Edit',  edit_admin_salon_path(salon) %>  <%= link_to 'Destroy', admin_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+     
      <% end %>
   <% end %>
 </div>

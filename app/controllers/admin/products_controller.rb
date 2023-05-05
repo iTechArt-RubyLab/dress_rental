@@ -1,15 +1,17 @@
 module Admin
   class ProductsController < AdminController
     before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_salon, only: %i[new create]
 
     def new
-      @product = Product.new
+      @product = @salon.products.build
     end
 
     def edit; end
 
     def create
-      @product = Product.new(product_params)
+      @product = @salon.products.build(product_params)
+      @product.salon = @salon
 
       respond_to do |format|
         if @product.save
@@ -42,6 +44,10 @@ module Admin
 
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def set_salon
+      @salon = Salon.find(params[:salon_id])
     end
 
     def product_params

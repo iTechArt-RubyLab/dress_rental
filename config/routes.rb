@@ -14,14 +14,17 @@ Rails.application.routes.draw do
     end
     resources :categories, only: %i[new create edit update destroy]
     resources :products, only: %i[new create edit update destroy]
-    resources :salons, only: %i[new create edit update destroy]
+    resources :salons, only: %i[new create edit update destroy] do 
+      resources :products, only: %i[new create edit update destroy]
+    end
     resources :comments, only: %i[create edit update destroy]
     resources :rentals, only: %i[index new create edit update destroy]
   end
 
   namespace :owner do
-    resources :categories, only: %i[new create edit update destroy]
-    resources :products, only: %i[new create edit update destroy]
+    resources :products, only: %i[new create edit update destroy] do
+      resources :products, only: %i[new create edit update destroy]
+    end
     resources :salons, only: %i[new create edit update destroy]
     resources :comments, only: %i[create edit update destroy]
     resources :rentals, only: %i[new create edit update destroy]
@@ -31,9 +34,11 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create edit update destroy]
     # resources :rentals, only: %i[new create edit update destroy] !!!
   end
+  post 'request_owner_access', to: 'users#request_owner_access'
 
   resources :salons, only: %i[index show] do
     resources :comments, only: %i[create edit update destroy]
+    resources :products, only: %i[new create edit update destroy]
   end
   resources :products, only: %i[index show]
   resources :categories, only: %i[index show]
