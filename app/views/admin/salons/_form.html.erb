@@ -1,0 +1,29 @@
+<%= form_with(model: salon, url: admin_salons_path(salon)) do |form| %>
+  <% if salon.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(salon.errors.count, "error") %> prohibited this salon from being saved:</h2>
+
+      <ul>
+        <% salon.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <%= form.hidden_field :owner_id, value: current_user.id %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

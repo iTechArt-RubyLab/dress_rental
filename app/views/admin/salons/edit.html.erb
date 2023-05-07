@@ -1,6 +1,6 @@
 <h1>Editing salon</h1>
 
-<%= render 'shared/salons/form', salon: @salon %>
+<%= render 'form', salon: @salon %>
 
 <% if current_user&.admin? %>
   <p><%= link_to 'Add new product',  new_admin_salon_product_path(@salon) %></p>

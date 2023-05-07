@@ -22,10 +22,10 @@ Rails.application.routes.draw do
   end
 
   namespace :owner do
-    resources :products, only: %i[new create edit update destroy] do
+    resources :salons, only: %i[new create edit update destroy] do
       resources :products, only: %i[new create edit update destroy]
     end
-    resources :salons, only: %i[new create edit update destroy]
+    resources :products, only: %i[new create edit update destroy]
     resources :comments, only: %i[create edit update destroy]
     resources :rentals, only: %i[new create edit update destroy]
   end

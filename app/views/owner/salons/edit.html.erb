@@ -1,0 +1,11 @@
+<h1>Editing salon</h1>
+
+<%= render 'form', salon: @salon %>
+
+<% if current_user&.owner? %>
+  <p><%= link_to 'Add new product',  new_owner_salon_product_path(@salon) %></p>
+<% end %>
+
+<div>
+  <%= link_to "Back to salons", salons_path %>
+</div>

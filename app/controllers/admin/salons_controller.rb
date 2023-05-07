@@ -45,7 +45,7 @@ module Admin
     end
 
     def salon_params
-      params.require(:salon).permit(:name, :description)
+      params.require(:salon).permit(:name, :description, :owner_id)
     end
   end
 end

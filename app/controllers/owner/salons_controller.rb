@@ -4,7 +4,6 @@ module Owner
     before_action :salon_owner!, only: %i[edit update destroy]
 
     def new
-      render 'shared/salons/new'
       @salon = Salon.new
     end
 
@@ -47,7 +46,7 @@ module Owner
     end
 
     def salon_params
-      params.require(:salon).permit(:name, :description)
+      params.require(:salon).permit(:name, :description, :owner_id)
     end
   end
 end

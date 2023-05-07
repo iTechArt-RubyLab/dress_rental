@@ -13,9 +13,11 @@
     <p>
       <%= link_to "Explore this salon's products", salon %>
     </p>
-         <% if current_user&.admin? %>
-     <p><%= link_to 'Edit',  edit_admin_salon_path(salon) %>  <%= link_to 'Destroy', admin_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-     
-     <% end %>
+    
+    <% if current_user&.admin? %>
+      <p><%= link_to 'Edit',  edit_admin_salon_path(salon) %>  <%= link_to 'Destroy', admin_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+    <% elsif current_user.salons.include?(salon) %>
+      <p><%= link_to 'Edit',  edit_owner_salon_path(salon) %>  <%= link_to 'Destroy', owner_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+    <% end %>
   <% end %>
 </div>

@@ -6,9 +6,12 @@
     <p>
       <%= link_to "Show this product", product %>
     </p>
-     <% if current_user && current_user.admin? %>
-     <p><%= link_to 'Edit',  edit_admin_product_path(product) %>  <%= link_to 'Destroy', admin_product_path(product.id) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-     <% end %>
+
+    <% if current_user&.admin? %>
+      <p><%= link_to 'Edit',  edit_admin_product_path(product) %>  <%= link_to 'Destroy', admin_product_path(product.id) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+    <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
+      <p><%= link_to 'Edit',  edit_owner_product_path(product) %>  <%= link_to 'Destroy', owner_product_path(product.id) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
+    <% end %>
   <% end %>
 </div>
 
