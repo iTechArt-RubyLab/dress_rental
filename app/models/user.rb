@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  DEFAULT_AVATAR_URL = 'default-avatar.png'
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [:google_oauth2]
@@ -13,6 +15,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
+  
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -20,15 +24,11 @@ class User < ApplicationRecord
     end
   end
 
-  def owned_salons
-    self.salons
-  end
-
   def avatar_url
     if avatar.attached?
       avatar
     else
-      'default-avatar.png'
+      DEFAULT_AVATAR_URL
     end
   end
 end
