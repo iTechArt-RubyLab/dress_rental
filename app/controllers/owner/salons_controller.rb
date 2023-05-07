@@ -1,8 +1,10 @@
 module Owner
   class SalonsController < OwnerController
     before_action :set_salon, only: %i[edit update destroy]
+    before_action :salon_owner!, only: %i[edit update destroy]
 
     def new
+      render 'shared/salons/new'
       @salon = Salon.new
     end
 
