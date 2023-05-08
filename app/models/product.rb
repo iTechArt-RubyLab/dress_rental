@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 
   validates :name, :price, :description, presence: true
 
-  def photo_url(size)
+  def photo_url(size = :medium)
     if photo.attached?
       photo.variant(resize_to_fill: [30, 30]).processed.url
     else
