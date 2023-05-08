@@ -22,8 +22,7 @@ module Admin
 
     def update
       if @category.update(category_params)
-        flash.now[:notice] = 'Category successfully updated.'
-        redirect_to @category
+        redirect_to @category, notice: 'Category successfully updated.'
       else
         render :edit
         flash.now[:error] = 'Could not save the changes.'

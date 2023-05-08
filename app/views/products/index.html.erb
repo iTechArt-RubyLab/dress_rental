@@ -1,17 +1,25 @@
 <h1>Products</h1>
 
-<div id="products">
+<div class="card-deck">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-
-    <% if current_user&.admin? %>
-      <p><%= link_to 'Edit',  edit_admin_product_path(product) %>  <%= link_to 'Destroy', admin_product_path(product.id) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-    <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
-      <p><%= link_to 'Edit',  edit_owner_product_path(product) %>  <%= link_to 'Destroy', owner_product_path(product.id) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-    <% end %>
+    <div class="card">
+      <%= image_tag product.photo_url(:medium), class: "card-img-top" %>
+      <div class="card-body">
+        <h5 class="card-title"><%= product.name %></h5>
+        <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Show this product", product, class: "btn btn-primary" %>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
+            <%= link_to 'Destroy', admin_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+          <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
+            <%= link_to 'Edit',  edit_owner_product_path(product), class: "btn btn-secondary" %>
+            <%= link_to 'Destroy', owner_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-

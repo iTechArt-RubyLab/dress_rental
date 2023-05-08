@@ -11,10 +11,9 @@ class RentalsController < ApplicationController
   def create
     @rental = current_user.rentals.new(rental_params)
     if @rental.save
-      redirect_to @rental
+      redirect_to @rental, notice: "Rental was successfully created."
     else
-      redirect_to new_rental_path
-      flash[:alert] = @rental.errors.full_messages.join("\n")
+      redirect_to new_rental_path, alert: @rental.errors.full_messages.join(', ')
     end
   end
 
@@ -25,16 +24,18 @@ class RentalsController < ApplicationController
   def update
     @rental.assign_attributes(rental_params)
     if @rental.update(rental_params)
-      redirect_to @rental
+      redirect_to @rental, notice: "Rental was successfully updated."
     else
-      redirect_to edit_rental_path
-      flash[:alert] = @rental.errors.full_messages.join("\n")
+      redirect_to edit_rental_path, alert: @rental.errors.full_messages.join(', ')
     end
   end
 
   def destroy
-    @rental.destroy
-    redirect_to root_path
+    if @rental.destroy
+      respond_to do |format|
+        format.html { redirect_to user_path(current_user), notice: "Rental was successfully destroyed." }
+      end
+    end
   end
 
   private
