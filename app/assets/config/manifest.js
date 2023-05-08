@@ -3,3 +3,5 @@
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
 //= link default-product-photo.png
+//= link logo.png
+//= link sign_up-photo.jpg
