@@ -9,16 +9,14 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      flash[:notice] = "Profile has been updated."
-      redirect_to edit_user_path(current_user)
+      redirect_to edit_user_path(current_user), notice: 'Profile has been updated.'
     else
-      render :edit
-      flash.now[:error] = "There was a problem updating the profile."
+      render :edit, alert: 'There was a problem updating the profile.'
     end
   end
 
   def request_owner_access
-    UserMailer.request_owner_access(current_user).deliver_now
+    RequestOwnerAccessWorker.perform_async(current_user.id)
     redirect_to user_path(current_user)
   end
 

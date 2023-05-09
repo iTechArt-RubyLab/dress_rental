@@ -43,5 +43,7 @@ Rails.application.routes.draw do
   resources :products, only: %i[index show]
   resources :categories, only: %i[index show]
   resources :users, only: %i[show edit update]
-  resources :rentals, only: %i[show new create edit update destroy]
+  resources :rentals, only: %i[show new create edit update destroy] do
+    get 'confirm/:confirmation_token', to: 'rentals#confirm'
+  end
 end

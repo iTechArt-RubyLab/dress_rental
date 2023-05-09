@@ -11,9 +11,21 @@ class RentalsController < ApplicationController
   def create
     @rental = current_user.rentals.new(rental_params)
     if @rental.save
-      redirect_to @rental, notice: "Rental was successfully created."
+      ConfirmationEmailWorker.perform_async(@rental.id)
+      redirect_to @rental, notice: 'Request for confirming the rental has been send to the owner.'
     else
-      redirect_to new_rental_path, alert: @rental.errors.full_messages.join(', ')
+      redirect_to new_rental_path, notice: "Something went wrong Please, try again."
+    end
+  end
+
+  def confirm
+    @rental = Rental.find_by(confirmation_token: params[:confirmation_token], id: params[:rental_id])
+
+    if @rental
+      @rental.update(status: :confirmed)
+      redirect_to @rental, notice: "Rental has been confirmed."
+    else
+      redirect_to root_url, alert: "Invalid confirmation token."
     end
   end
 
@@ -45,6 +57,6 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    params.require(:rental).permit(:start_date, :end_date, :product_id)
+    params.require(:rental).permit(:start_date, :end_date, :product_id, :status)
   end
 end
