@@ -24,6 +24,7 @@ class RentalsController < ApplicationController
     if @rental
       @rental.update(status: :confirmed)
       redirect_to @rental, notice: "Rental has been confirmed."
+      UserRentalConfirmationEmailWorker.perform_async(@rental.id)
     else
       redirect_to root_url, alert: "Invalid confirmation token."
     end

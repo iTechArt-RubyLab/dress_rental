@@ -1,9 +1,11 @@
-<h1>Новый заказ на аренду</h1>
-<p>Здравствуйте, <%= @rental.product.salon.owner.email %>!</p>
-<p>У вас появился новый заказ на аренду:</p>
+<h1>New rental</h1>
+<p>Hello, <%= @rental.product.salon.owner.email %>!</p>
+<p>We are writing to notify you that :</p>
 <ul>
-  <li>Дата начала аренды: <%= @rental.start_date %></li>
-  <li>Дата окончания аренды: <%= @rental.end_date %></li>
+  <li>Salon: <%= @rental.product.salon.name %></li>
+  <li>Rented product: <%= @rental.product.name %></li>
+  <li>Rental starts: <%= @rental.start_date %></li>
+  <li>Rental ends: <%= @rental.end_date %></li>
 </ul>
-<p>Для подтверждения заказа перейдите по ссылке:</p>
+<p>To confirm the rental, please, click the link below:</p>
 <p><%= link_to "Confirm rental", url_for(controller: 'rentals', action: 'confirm', rental_id: @rental.id, confirmation_token: @rental.confirmation_token) %></p>

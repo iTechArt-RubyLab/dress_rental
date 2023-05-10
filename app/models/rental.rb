@@ -2,6 +2,7 @@ class Rental < ApplicationRecord
   belongs_to :user
   belongs_to :product
   before_save :generate_confirmation_token
+  after_commit :schedule_expiration_notification, on: [:update]
 
   validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
   validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
@@ -11,6 +12,10 @@ class Rental < ApplicationRecord
 
   def total_price
     (end_date - start_date + 1).to_i * product.price
+  end
+
+  def schedule_expiration_notification
+    RentalExpirationWorker.perform_async(id) if self.confirmed?
   end
 
   private
