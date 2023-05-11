@@ -15,11 +15,20 @@
             <%= link_to 'Salons', salons_path %>
           </li>
           <li>
+            <% if current_user&.admin? %><%= link_to 'Rentals',  admin_rentals_path %><% end %>
+          </li>
+          <li>
+           <% if current_user&.admin? %><%= link_to 'Users', admin_users_path %><% end %>
+           </li>
+          <li>
             <% if !user_signed_in? %><%= link_to 'Sign up', new_user_registration_path %><% end %>
           </li>
           <li>
-            <% if current_user %><%= link_to 'Account', user_path(current_user.id) %><% end %>
+            <% if current_user %><%= link_to 'Account', user_path(current_user.id) %>
+             <%= link_to image_tag(current_user.avatar_url, alt: 'User avatar', class: 'avatar'), user_path(current_user.id) %>
+             <% end %>
           </li>
+
           <li>
             <% if !user_signed_in? %>
               <%= link_to 'Log in', new_user_session_path %>

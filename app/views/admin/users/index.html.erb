@@ -1,0 +1,21 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? "Yes" : "No" %></td>
+        <td><%= user.owner? ? "Yes" : "No" %></td>
+        <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+        <td><%= link_to "Destroy", admin_user_path(user), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></td>
+        <td><%= form_tag(confirm_owner_admin_user_path(user), method: :post) { submit_tag 'Confirm Owner' } %></td>
+      </tr>
+    <% end %>

@@ -1,5 +1,11 @@
 <%= render @category %>
-<%= render @category.products %>
 <div>
+
+<h3>Products in this category:</h3>
+<ul>
+  <% @category.products.each do |product| %>
+    <li><%= link_to "#{product.name}", product %></li>
+  <% end %>
+</ul>
   <%= link_to "Back to categories", categories_path %>
 </div>

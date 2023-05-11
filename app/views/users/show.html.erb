@@ -13,3 +13,8 @@
       <% end %>
     </ul><br>
 <% end %>
+
+<%= link_to "Edit my account", edit_user_path(@user) %>
+<%= form_with(url: request_owner_access_path, method: :post) do |form| %>
+  <%= form.submit "Request owner rights" %>
+<% end %>

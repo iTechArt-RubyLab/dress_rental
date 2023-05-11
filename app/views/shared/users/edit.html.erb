@@ -1,0 +1,9 @@
+<%= form_for(@user, url: (current_user.admin? ? admin_user_path(@user) : user_path(@user)), method: :put) do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar %>
+
+  <%= f.submit 'Update Profile' %>
+<% end %>

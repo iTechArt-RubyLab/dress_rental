@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
-  before_action :set_rental, only: %i[ show update destroy ]
+  before_action :set_rental, only: %i[show edit update destroy]
 
   def new
     @rental = Rental.new
@@ -14,12 +14,12 @@ class RentalsController < ApplicationController
       redirect_to @rental
     else
       redirect_to new_rental_path
-      flash[:message] = @rental.errors.full_messages.join("\n")
+      flash[:alert] = @rental.errors.full_messages.join("\n")
     end
   end
 
   def edit
-    @rental = Rental.find(params[:id])
+    render "rentals/_edit"
   end
 
   def update
@@ -28,7 +28,7 @@ class RentalsController < ApplicationController
       redirect_to @rental
     else
       redirect_to edit_rental_path
-      flash[:message] = @rental.errors.full_messages.join("\n")
+      flash[:alert] = @rental.errors.full_messages.join("\n")
     end
   end
 
