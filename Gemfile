@@ -42,6 +42,9 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 # Code style checking and code formatting tool
 gem 'rubocop', '~> 1.50', '>= 1.50.2'
 
+# Rails code style checking tool
+gem 'rubocop-rails', '~> 2.19', '>= 2.19.1'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 

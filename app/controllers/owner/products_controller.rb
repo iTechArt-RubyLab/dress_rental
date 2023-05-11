@@ -1,7 +1,7 @@
 module Owner
   class ProductsController < OwnerController
     before_action :set_salon, only: %i[new create]
-    before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_product, only: %i[edit update destroy]
     before_action :salon_product!, only: %i[edit update destroy]
 
     def new

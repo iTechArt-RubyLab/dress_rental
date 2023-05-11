@@ -1,6 +1,6 @@
 module Admin
   class ProductsController < AdminController
-    before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_product, only: %i[edit update destroy]
     before_action :set_salon, only: %i[new create]
 
     def new
