@@ -14,7 +14,9 @@ module Owner
     end
 
     def salon_product!
-      redirect_to root_path, alert: 'Access Denied' unless current_user.salons.any? { |salon| salon.products.include?(@product) }
+      redirect_to root_path, alert: 'Access Denied' unless current_user.salons.any? do |salon|
+                                                             salon.products.include?(@product)
+                                                           end
     end
   end
 end

@@ -11,7 +11,7 @@ module Admin
 
       respond_to do |format|
         if @category.save
-          format.html { redirect_to category_path(@category), notice: "Category was successfully created." }
+          format.html { redirect_to category_path(@category), notice: 'Category was successfully created.' }
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -33,7 +33,7 @@ module Admin
       @category.destroy
 
       respond_to do |format|
-        format.html { redirect_to admin_categories_path, notice: "Category was successfully destroyed." }
+        format.html { redirect_to admin_categories_path, notice: 'Category was successfully destroyed.' }
       end
     end
 

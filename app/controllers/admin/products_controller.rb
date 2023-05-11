@@ -1,6 +1,6 @@
 module Admin
   class ProductsController < AdminController
-    before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_product, only: %i[edit update destroy]
     before_action :set_salon, only: %i[new create]
 
     def new
@@ -15,7 +15,7 @@ module Admin
 
       respond_to do |format|
         if @product.save
-          format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+          format.html { redirect_to product_url(@product), notice: 'Product was successfully created.' }
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -25,18 +25,20 @@ module Admin
     def update
       respond_to do |format|
         if @product.update(product_params)
-          format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+          format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
         else
-          format.html { redirect_to edit_admin_product_path(@product), alert: "There was an error while updating the product." }
+          format.html do
+            redirect_to edit_admin_product_path(@product), alert: 'There was an error while updating the product.'
+          end
         end
       end
     end
 
     def destroy
-      if @product.destroy
-        respond_to do |format|
-          format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-        end
+      return unless @product.destroy
+
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       end
     end
 
