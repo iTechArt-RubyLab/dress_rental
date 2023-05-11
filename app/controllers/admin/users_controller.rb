@@ -13,7 +13,6 @@ module Admin
     end
 
     def update
-      @current_user = current_user
       if @user.update(user_params)
         redirect_to edit_user_path(@user), notice: 'Profile successfully updated.'
       else

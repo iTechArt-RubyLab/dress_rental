@@ -1,7 +1,8 @@
 module Owner
   class ProductsController < OwnerController
-    before_action :set_product, only: %i[show edit update destroy]
     before_action :set_salon, only: %i[new create]
+    before_action :set_product, only: %i[show edit update destroy]
+    before_action :salon_product!, only: %i[edit update destroy]
 
     def new
       @product = Product.new
@@ -35,19 +36,19 @@ module Owner
     def destroy
       if @product.destroy
         respond_to do |format|
-          format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+          format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
         end
       end
     end
 
     private
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
-
     def set_salon
       @salon = Salon.find(params[:salon_id])
+    end
+
+    def set_product
+      @product = Product.find(params[:id])
     end
 
     def product_params
