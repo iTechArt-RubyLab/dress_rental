@@ -27,16 +27,16 @@ module Admin
         if @product.update(product_params)
           format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
         else
-          format.html { render :edit, status: :unprocessable_entity }
+          format.html { redirect_to edit_admin_product_path(@product), alert: "There was an error while updating the product." }
         end
       end
     end
 
     def destroy
-      @product.destroy
-
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      if @product.destroy
+        respond_to do |format|
+          format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+        end
       end
     end
 
@@ -51,7 +51,7 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:name, :price, :description)
+      params.require(:product).permit(:name, :price, :description, :photo)
     end
   end
 end

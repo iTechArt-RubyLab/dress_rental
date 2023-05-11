@@ -23,19 +23,21 @@ module Owner
 
     def update
       if @salon.update(salon_params)
-        flash.now[:notice] = 'Salon successfully updated.'
-        redirect_to salon_path(@salon)
+        respond_to do |format|
+          format.html { redirect_to salon_path(@salon), notice: "Salon was successfully updated." }
+        end
       else
-        render :edit
-        flash.now[:error] = 'Could not save the changes.'
+        respond_to do |format|
+          format.html { render :edit, alert: "Something went wrong. Please try again." }
+        end
       end
     end
 
     def destroy
-      @salon.destroy
-
-      respond_to do |format|
-        format.html { redirect_to admin_salons_path, notice: "Salon was successfully destroyed." }
+      if @salon.destroy
+        respond_to do |format|
+          format.html { redirect_to admin_salons_path, notice: "Salon was successfully destroyed." }
+        end
       end
     end
 
