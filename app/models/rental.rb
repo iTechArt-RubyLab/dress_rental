@@ -9,14 +9,14 @@ class Rental < ApplicationRecord
   def total_price
     (end_date - start_date + 1).to_i * product.price
   end
-  
+
   private
 
   def product_available
     if Rental.where(product_id: product.id)
-              .where.not(id: id)
-              .where("(start_date, end_date) OVERLAPS (?, ?)", start_date, end_date)
-              .exists?
+             .where.not(id:)
+             .where('(start_date, end_date) OVERLAPS (?, ?)', start_date, end_date)
+             .exists?
       errors.add(:base, "Product with code #{product.id} is already booked for this period")
     end
   end

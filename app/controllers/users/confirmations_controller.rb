@@ -6,12 +6,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      flash[:notice] = "Your account has been successfully confirmed."
+      flash[:notice] = 'Your account has been successfully confirmed.'
       sign_in(resource)
-      redirect_to root_url
     else
-      flash[:error] = "Invalid confirmation token."
-      redirect_to root_url
+      flash[:error] = 'Invalid confirmation token.'
     end
+    redirect_to root_url
   end
 end

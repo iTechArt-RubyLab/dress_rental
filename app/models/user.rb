@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  DEFAULT_AVATAR_URL = 'default-avatar.png'
+  DEFAULT_AVATAR_URL = 'default-avatar.png'.freeze
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable,
@@ -14,8 +14,6 @@ class User < ApplicationRecord
   enum role_type: { user: 1, admin: 2, owner: 3 }
 
   validates :email, presence: true
-
-  
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

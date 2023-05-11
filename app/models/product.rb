@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  DEFAULT_PHOTO_URL = 'default-product-photo.png'
+  DEFAULT_PHOTO_URL = 'default-product-photo.png'.freeze
   has_many :product_categories
   has_many :categories, through: :product_categories
   belongs_to :salon
@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 
   validates :name, :price, :description, presence: true
 
-  def photo_url(size = :medium)
+  def photo_url(_size = :medium)
     if photo.attached?
       photo.variant(resize_to_fill: [30, 30]).processed.url
     else

@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.3)
       public_suffix (>= 2.0.2, < 6.0)
+    ast (2.4.2)
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
@@ -149,6 +150,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
+    json (2.6.3)
     jwt (2.7.0)
     loofah (2.20.0)
       crass (~> 1.0.2)
@@ -201,6 +203,9 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    parallel (1.23.0)
+    parser (3.2.2.1)
+      ast (~> 2.4.1)
     pg (1.4.6)
     popper_js (2.11.7)
     pry (0.14.2)
@@ -243,6 +248,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.7.0)
     reline (0.3.3)
@@ -268,6 +274,19 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    rubocop (1.50.2)
+      json (~> 2.3)
+      parallel (~> 1.10)
+      parser (>= 3.2.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.28.1)
+      parser (>= 3.2.1.0)
+    ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -305,6 +324,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.4.2)
     version_gem (1.1.2)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -329,28 +349,29 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
-  activestorage
+  activestorage (~> 7.0, >= 7.0.4.3)
   aws-sdk-s3
   bootsnap
-  bootstrap
+  bootstrap (~> 5.2, >= 5.2.3)
   capybara
   debug
-  devise
-  dotenv-rails
-  factory_bot (~> 6.2)
+  devise (~> 4.9, >= 4.9.2)
+  dotenv-rails (~> 2.8, >= 2.8.1)
+  factory_bot (~> 6.2, >= 6.2.1)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   mini_magick
-  omniauth
-  omniauth-google-oauth2
-  omniauth-rails_csrf_protection
+  omniauth (~> 2.1, >= 2.1.1)
+  omniauth-google-oauth2 (~> 1.1, >= 1.1.1)
+  omniauth-rails_csrf_protection (~> 1.0, >= 1.0.1)
   pg (~> 1.1)
   pry
   puma (~> 5.0)
   pundit (~> 2.3)
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails (~> 6.0.0)
+  rubocop (~> 1.50, >= 1.50.2)
   selenium-webdriver
   sprockets-rails
   stimulus-rails

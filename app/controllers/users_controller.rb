@@ -9,11 +9,11 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      flash[:notice] = "Profile has been updated."
+      flash[:notice] = 'Profile has been updated.'
       redirect_to edit_user_path(current_user)
     else
       render :edit
-      flash.now[:error] = "There was a problem updating the profile."
+      flash.now[:error] = 'There was a problem updating the profile.'
     end
   end
 

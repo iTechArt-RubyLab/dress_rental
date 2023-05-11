@@ -1,6 +1,6 @@
 module Admin
   class UsersController < AdminController
-  before_action :set_user, only: %i[show edit update confirm_owner destroy]
+    before_action :set_user, only: %i[show edit update confirm_owner destroy]
 
     def index
       @users = User.all
@@ -33,7 +33,7 @@ module Admin
       @user.destroy
 
       respond_to do |format|
-        format.html { redirect_to admin_users_url, notice: "User was successfully destroyed." }
+        format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
       end
     end
 
