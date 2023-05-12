@@ -14,17 +14,20 @@ class Rental < ApplicationRecord
     (end_date - start_date + 1).to_i * product.price
   end
 
+<<<<<<< HEAD
   def schedule_expiration_notification
     RentalExpirationWorker.perform_async(id) if self.confirmed?
   end
 
+=======
+>>>>>>> development
   private
 
   def product_available
     if Rental.where(product_id: product.id)
-              .where.not(id: id)
-              .where("(start_date, end_date) OVERLAPS (?, ?)", start_date, end_date)
-              .exists?
+             .where.not(id:)
+             .where('(start_date, end_date) OVERLAPS (?, ?)', start_date, end_date)
+             .exists?
       errors.add(:base, "Product with code #{product.id} is already booked for this period")
     end
   end

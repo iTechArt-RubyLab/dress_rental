@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path
   end
@@ -16,11 +15,11 @@ class Users::SessionsController < Devise::SessionsController
       if user.confirmed?
         sign_in(user)
       else
-        flash[:error] = "Your account is not yet confirmed"
+        flash[:error] = 'Your account is not yet confirmed'
       end
       redirect_to root_path
     else
-      flash[:error] = "Invalid email or password"
+      flash[:error] = 'Invalid email or password'
     end
   end
 end
