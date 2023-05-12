@@ -36,9 +36,14 @@ gem 'aws-sdk-s3'
 # Manipulate images with minimal use of memory
 gem 'mini_magick'
 
-gem 'sidekiq'
+#  Background processing for Ruby
+gem 'sidekiq', '~> 7.1'
 
-gem 'redis'
+# A Ruby client that tries to match Redis' API one-to-one
+gem 'redis', '~> 5.0', '>= 5.0.6'
+
+# For writing and deploying cron jobs
+gem 'whenever', '~> 1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'

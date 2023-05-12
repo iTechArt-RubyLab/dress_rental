@@ -15,7 +15,7 @@ class RentalMailer < ApplicationMailer
 
   def rental_expiration_notification(rental)
     @rental = rental
-    mail(to: @rental.user.email, subject: 'Your rental expires less than in 5 days') do |format|
+    mail(to: @rental.user.email, subject: 'Your rental expires soon!') do |format|
       format.html { render 'mailer/rental_mailer/rental_expiration_notification' }
     end
   end

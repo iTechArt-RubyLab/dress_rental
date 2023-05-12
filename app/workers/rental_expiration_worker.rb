@@ -4,7 +4,7 @@ class RentalExpirationWorker
   def perform(rental_id)
     rental = Rental.find(rental_id)
 
-    if rental.end_date < 5.days.from_now
+    if rental.present?
       RentalMailer.rental_expiration_notification(rental).deliver_now
     end
   end
