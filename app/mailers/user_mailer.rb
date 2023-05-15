@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
 
   def request_owner_access(user)
     @user = user
-    mail(to: 'ENV["SENDMAIL_USERNAME"]', subject: 'New owner access request') do |format|
+    mail(to: ENV['SYSTEM_EMAIL'], subject: 'New owner access request') do |format|
       format.html { render 'mailer/user_mailer/request_owner_access' }
     end
   end

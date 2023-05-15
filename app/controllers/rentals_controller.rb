@@ -21,8 +21,8 @@ class RentalsController < ApplicationController
   def confirm
     @rental = Rental.find_by(confirmation_token: params[:confirmation_token], id: params[:rental_id])
 
-    if @rental
-      @rental.update(status: :confirmed)
+    if @rental.present?
+      @rental.confirmed!
       redirect_to @rental, notice: 'Rental has been confirmed.'
       UserRentalConfirmationEmailWorker.perform_async(@rental.id)
     else
