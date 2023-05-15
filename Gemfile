@@ -39,11 +39,11 @@ gem 'mini_magick'
 #  Background processing for Ruby
 gem 'sidekiq', '~> 7.1'
 
+# Job scheduling extension for Sidekiq
+gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.2'
+
 # A Ruby client that tries to match Redis' API one-to-one
 gem 'redis', '~> 5.0', '>= 5.0.6'
-
-# For writing and deploying cron jobs
-gem 'whenever', '~> 1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'

@@ -3,8 +3,8 @@ class Rental < ApplicationRecord
   belongs_to :product
   before_save :generate_confirmation_token
 
-  # validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
-  # validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
+  validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
+  validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
   validate :product_available
 
   enum status: { unconfirmed: 1, confirmed: 2, active: 3, archived: 4 }
@@ -13,12 +13,16 @@ class Rental < ApplicationRecord
     (end_date - start_date + 1).to_i * product.price
   end
 
-  def self.send_rental_expiration_notification
-    rentals = Rental.where('end_date BETWEEN ? AND ?', Date.today, 3.days.from_now.to_date)
+  def self.send_rental_expiration_notifications
+    rentals = Rental.where('end_date BETWEEN ? AND ?', Date.today, 5.days.from_now.to_date)
   
     rentals.select(&:confirmed?).each do |rental|
-      RentalExpirationWorker.perform_async(rental.id) 
+      RentalMailer.rental_expiration_notification(rental).deliver_now
     end
+  end
+
+  def expired?
+    end_date < Date.today
   end
 
   private
