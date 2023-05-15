@@ -1,0 +1,7 @@
+<p>Dear <b><%= @rental.user.email %></b>, we are here to notify you that your rental № <%= @rental.id%> will expire in <%= (@rental.end_date - Time.zone.today).to_i %> days. Rental info:</p>
+<ul>
+  <li>Rented product: <%= @rental.product.name %></li>
+  <li>Rental start: <%= @rental.start_date %></li>
+  <li>Rental end: <%= @rental.end_date %></li>
+</ul>
+<p>Thank you for choosing our service!<p>

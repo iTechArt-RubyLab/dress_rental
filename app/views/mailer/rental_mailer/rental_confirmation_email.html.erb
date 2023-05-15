@@ -1,0 +1,11 @@
+<h1>New rental</h1>
+<p>Hello, <%= @rental.product.salon.owner.email %>!</p>
+<p>We are writing to notify you that :</p>
+<ul>
+  <li>Salon: <%= @rental.product.salon.name %></li>
+  <li>Rented product: <%= @rental.product.name %></li>
+  <li>Rental starts: <%= @rental.start_date %></li>
+  <li>Rental ends: <%= @rental.end_date %></li>
+</ul>
+<p>To confirm the rental, please, click the link below:</p>
+<p><%= link_to "Confirm rental", url_for(controller: 'rentals', action: 'confirm', rental_id: @rental.id, confirmation_token: @rental.confirmation_token) %></p>

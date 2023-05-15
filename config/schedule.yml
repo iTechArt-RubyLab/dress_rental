@@ -1,0 +1,7 @@
+default: &default
+  :concurrency: 1
+
+send_rental_expiration_notifications:
+  cron: "0 10 * * *"
+  class: RentalExpirationNotifierWorker
+  queue: default
