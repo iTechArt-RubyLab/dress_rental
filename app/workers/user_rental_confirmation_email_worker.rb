@@ -4,8 +4,8 @@ class UserRentalConfirmationEmailWorker
   def perform(rental_id)
     rental = Rental.find_by(id: rental_id)
 
-    if rental.present?
-      RentalMailer.rental_confirmation_notification(rental).deliver_now
-    end
+    return if rental.blank?
+
+    RentalMailer.rental_confirmation_notification(rental).deliver_now
   end
 end

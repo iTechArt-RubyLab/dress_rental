@@ -14,7 +14,7 @@ class RentalsController < ApplicationController
       ConfirmationEmailWorker.perform_async(@rental.id)
       redirect_to @rental, notice: 'Request for confirming the rental has been send to the owner.'
     else
-      redirect_to new_rental_path, notice: "Something went wrong Please, try again."
+      redirect_to new_rental_path, notice: 'Something went wrong Please, try again.'
     end
   end
 
@@ -23,10 +23,10 @@ class RentalsController < ApplicationController
 
     if @rental
       @rental.update(status: :confirmed)
-      redirect_to @rental, notice: "Rental has been confirmed."
+      redirect_to @rental, notice: 'Rental has been confirmed.'
       UserRentalConfirmationEmailWorker.perform_async(@rental.id)
     else
-      redirect_to root_url, alert: "Invalid confirmation token."
+      redirect_to root_url, alert: 'Invalid confirmation token.'
     end
   end
 
