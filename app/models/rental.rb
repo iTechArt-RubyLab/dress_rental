@@ -10,15 +10,7 @@ class Rental < ApplicationRecord
   enum status: { unconfirmed: 1, confirmed: 2, active: 3, archived: 4 }
 
   def total_price
-    (end_date - start_date + 1).to_i * product.price
-  end
-
-  def self.send_rental_expiration_notifications
-    rentals = Rental.where('end_date BETWEEN ? AND ?', Time.zone.today, 5.days.from_now.to_date)
-
-    rentals.select(&:confirmed?).each do |rental|
-      RentalMailer.rental_expiration_notification(rental).deliver_now
-    end
+    RentalPriceCalculator.call(start_date: start_date, end_date: end_date, product_price: product.price).result
   end
 
   def expired?

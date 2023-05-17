@@ -48,6 +48,9 @@ gem 'redis', '~> 5.0', '>= 5.0.6'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 
+# A collection of lightweight, standardized, rails-oriented patterns. Used for services
+gem 'rails-patterns', '~> 0.11.0'
+
 # Code style checking and code formatting tool
 gem 'rubocop', '~> 1.50', '>= 1.50.2'
 
