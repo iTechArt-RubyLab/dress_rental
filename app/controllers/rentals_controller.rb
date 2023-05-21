@@ -43,6 +43,12 @@ class RentalsController < ApplicationController
     end
   end
 
+  def export_csv
+    rentals = Rental.all
+
+    send_data CsvExporter.call(rentals), filename: "rentals-#{Date.today}.csv", type: 'text/csv'
+  end
+
   def destroy
     return unless @rental.destroy
 

@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :comments, only: %i[create edit update destroy]
-    # resources :rentals, only: %i[new create edit update destroy] !!!
   end
   post 'request_owner_access', to: 'users#request_owner_access'
 
@@ -45,5 +44,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update]
   resources :rentals, only: %i[show new create edit update destroy] do
     get 'confirm/:confirmation_token', to: 'rentals#confirm'
+    collection do
+      get :export_csv
+    end
   end
 end
