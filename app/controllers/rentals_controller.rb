@@ -10,6 +10,7 @@ class RentalsController < ApplicationController
 
   def create
     @rental = current_user.rentals.new(rental_params)
+    @rental.total_price = RentalPriceCalculator.call(start_date: rental_params[:start_date], end_date: rental_params[:end_date], product_price: @rental.product.price).result
     if @rental.save
       ConfirmationEmailWorker.perform_async(@rental.id)
       redirect_to @rental, notice: 'Request for confirming the rental has been send to the owner.'
