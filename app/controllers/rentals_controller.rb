@@ -47,7 +47,7 @@ class RentalsController < ApplicationController
   def export_csv
     rentals = Rental.all
 
-    send_data CsvExporter.call(rentals), filename: "rentals-#{Date.today}.csv", type: 'text/csv'
+    send_data CsvExporter.call(rentals), filename: "Rentals-statistics-#{Date.today}.csv", type: 'text/csv'
   end
 
   def destroy
