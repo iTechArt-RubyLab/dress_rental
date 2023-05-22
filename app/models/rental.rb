@@ -10,7 +10,7 @@ class Rental < ApplicationRecord
   enum status: { unconfirmed: 1, confirmed: 2, active: 3, archived: 4 }
 
   def total_price
-    RentalPriceCalculator.call(start_date: start_date, end_date: end_date, product_price: product.price).result
+    RentalPriceCalculator.call(start_date:, end_date:, product_price: product.price).result
   end
 
   def expired?

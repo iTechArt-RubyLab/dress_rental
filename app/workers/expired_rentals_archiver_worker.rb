@@ -3,9 +3,9 @@ class ExpiredRentalsArchiverWorker
   include Sidekiq::Worker
 
   def perform
-    expired_rentals = Rental.where("end_date < ?", Date.today).where.not(status: :archived)
-    expired_rentals.update_all(status: :archived)
+    expired_rentals = Rental.where('end_date < ?', Time.zone.today).where.not(status: :archived)
     expired_rentals.each do |rental|
+      rental.update(status: :archived)
       RentalRatingRequestWorker.perform_async(rental.id)
     end
   end
