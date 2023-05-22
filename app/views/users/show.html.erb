@@ -1,32 +1,35 @@
 <% @user = current_user %>
-<% @current_rentals = @user.rentals.active %>
+<% @confirmed_rentals = @user.rentals.confirmed %>
 <% @archived_rentals = @user.rentals.archived %>
 
 <h1>Welcome, <%= @user.email%>!</h1>
 
-<% if @current_rentals.any? %>
-  <h4>Current Rentals:</h4>
-  <ul>
-    <% @current_rentals.each do |rental| %>
-      <li>
-        <%= link_to "#{rental.product.name} from #{rental.start_date} to #{rental.end_date}. Total price: #{rental.total_price}$", [rental] %>
-      </li>
-    <% end %>
-  </ul><br>
-<% else %>
-  <p>You do not have any active rentals!</p>
+<% if @user.rentals.any? %>
+  <h3>Rentals:</h3>
+  <table class='table table-striped'>
+    <thead class='thead-dark'>
+      <tr>
+        <th>Product</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Total Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.rentals.order(:status).each do |rental| %>
+        <tr>
+          <td><%= rental.product.name %></td>
+          <td><%= rental.start_date %></td>
+          <td><%= rental.end_date %></td>
+          <td><%= rental.total_price %> $</td>
+          <td><%= rental.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
-<% if @archived_rentals.any? %>
-  <h4>Archived Rentals:</h4>
-  <ul>
-    <% @archived_rentals.each do |rental| %>
-      <li>
-        <%= link_to "#{rental.product.name} from #{rental.start_date} to #{rental.end_date}. Total price: #{rental.total_price}$", [rental] %>
-      </li>
-    <% end %>
-  </ul><br>
-<% end %>
 
 <%= link_to "Edit my account", edit_user_path(@user) %>
 <%= form_with(url: request_owner_access_path, method: :post) do |form| %>
