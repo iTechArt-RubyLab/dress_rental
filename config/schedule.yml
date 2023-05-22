@@ -7,7 +7,6 @@ send_rental_expiration_notifications:
   queue: default
 
 archive_expired_rentals:
-  # cron: "0 0 * * *"
-  every: 2s
+  cron: "0 0 * * *"
   class:   ExpiredRentalsArchiverWorker
   queue: default
