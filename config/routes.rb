@@ -43,9 +43,7 @@ Rails.application.routes.draw do
   resources :categories, only: %i[index show]
   resources :users, only: %i[show edit update]
   resources :rentals, only: %i[show new create edit update destroy] do
+    get :export_csv, on: :collection
     get 'confirm/:confirmation_token', to: 'rentals#confirm'
-    collection do
-      get :export_csv
-    end
   end
 end
