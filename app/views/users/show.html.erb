@@ -1,17 +1,31 @@
 <% @user = current_user %>
+<% @current_rentals = @user.rentals.active %>
+<% @archived_rentals = @user.rentals.archived %>
 
 <h1>Welcome, <%= @user.email%>!</h1>
-<% if @user.rentals.empty? %>
-    <p>You do not have any rentals! </p>
-<% elsif @user.rentals%>
-    <h4>Current Rentals</h4>
-      <ul>
-        <% @user.rentals.each do |rental| %>
-          <li>
-          <%= link_to "#{rental.product.name} from #{rental.start_date} to #{rental.end_date}. Total price: #{rental.total_price}$", [rental] %>
-        </li>
-      <% end %>
-    </ul><br>
+
+<% if @current_rentals.any? %>
+  <h4>Current Rentals:</h4>
+  <ul>
+    <% @current_rentals.each do |rental| %>
+      <li>
+        <%= link_to "#{rental.product.name} from #{rental.start_date} to #{rental.end_date}. Total price: #{rental.total_price}$", [rental] %>
+      </li>
+    <% end %>
+  </ul><br>
+<% else %>
+  <p>You do not have any active rentals!</p>
+<% end %>
+
+<% if @archived_rentals.any? %>
+  <h4>Archived Rentals:</h4>
+  <ul>
+    <% @archived_rentals.each do |rental| %>
+      <li>
+        <%= link_to "#{rental.product.name} from #{rental.start_date} to #{rental.end_date}. Total price: #{rental.total_price}$", [rental] %>
+      </li>
+    <% end %>
+  </ul><br>
 <% end %>
 
 <%= link_to "Edit my account", edit_user_path(@user) %>

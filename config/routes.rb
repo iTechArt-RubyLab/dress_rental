@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  root "pages#home"
+  root "products#index"
 
   namespace :admin do
     resources :users, only: %i[index edit update destroy] do
