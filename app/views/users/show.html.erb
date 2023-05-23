@@ -1,6 +1,7 @@
 <% @user = current_user %>
 
 <h1>Welcome, <%= @user.email%>!</h1>
+<p>Rating: <%= @user.rating%></p>
 <% if @user.rentals.empty? %>
     <p>You do not have any rentals! </p>
 <% elsif @user.rentals%>
