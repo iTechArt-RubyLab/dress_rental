@@ -7,8 +7,6 @@ class User < ApplicationRecord
 
   enum role_type: { user: 1, admin: 2, owner: 3 }
 
-before_save :update_rating
-
   has_many :rentals, dependent: :destroy
   has_many :products, through: :rentals
   has_many :comments
@@ -30,11 +28,5 @@ before_save :update_rating
     else
       DEFAULT_AVATAR_URL
     end
-  end
-
-  private
-
-  def update_rating
-    RatingCalculator.update_user_rating(self)
   end
 end
