@@ -5,7 +5,7 @@ class ExpiredRentalsArchiverWorker
   def perform
     expired_rentals = Rental.where('end_date < ?', Time.zone.today).where.not(status: :archived)
     expired_rentals.each do |rental|
-      rental.update(status: :archived)
+      rental.archived!
       RentalRatingRequestWorker.perform_async(rental.id)
     end
   end
