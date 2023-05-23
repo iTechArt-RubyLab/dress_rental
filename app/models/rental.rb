@@ -2,6 +2,7 @@ class Rental < ApplicationRecord
   belongs_to :user
   belongs_to :product
   before_validation :generate_confirmation_token
+  before_validation :calculate_total_price
 
   validates :start_date, presence: true, comparison: { less_than_or_equal_to: :end_date }
   validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
@@ -9,15 +10,15 @@ class Rental < ApplicationRecord
 
   enum status: { unconfirmed: 1, confirmed: 2, active: 3, archived: 4 }
 
-  def total_price
-    RentalPriceCalculator.call(start_date:, end_date:, product_price: product.price).result
-  end
-
   def expired?
     end_date < Time.zone.today
   end
 
   private
+
+  def calculate_total_price
+    self.total_price = RentalPriceCalculator.call(start_date: start_date, end_date: end_date, product_price: product.price).result
+  end
 
   def product_available
     if Rental.where(product_id: product.id)
