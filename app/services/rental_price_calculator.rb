@@ -1,7 +1,7 @@
 class RentalPriceCalculator < Patterns::Service
   def initialize(start_date:, end_date:, product_price:)
-    @start_date = Date.parse(start_date)
-    @end_date = Date.parse(end_date)
+    @start_date = start_date
+    @end_date = end_date
     @product_price = product_price
   end
 
