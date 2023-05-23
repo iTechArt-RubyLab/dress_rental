@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
-  before_action :set_rental, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy rate]
+  before_action :set_rental, only: %i[show edit update destroy rate]
 
   def new
     @rental = Rental.new
@@ -28,6 +28,12 @@ class RentalsController < ApplicationController
     else
       redirect_to root_url, alert: 'Invalid confirmation token.'
     end
+  end
+
+  def rate
+    @rental.update(user_rating: params[:user_rating])
+    RatingCalculator.update_salon_rating(@rental.product.salon)
+    redirect_to @rental.product, notice: 'Thank you for rating your rental!'
   end
 
   def edit
