@@ -32,7 +32,7 @@ class RentalsController < ApplicationController
 
   def rate
     @rental.update(user_rating: params[:user_rating])
-    RatingCalculator.update_salon_rating(@rental.product.salon)
+    Salon.update_salon_rating(@rental.product.salon)
     redirect_to @rental.product, notice: 'Thank you for rating your rental!'
   end
 

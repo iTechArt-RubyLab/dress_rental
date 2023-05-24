@@ -22,6 +22,11 @@ class User < ApplicationRecord
     end
   end
 
+  def self.update_user_rating(user)
+    average_rating = user.rentals.where.not(salon_rating: nil).average(:salon_rating)
+    user.update(rating: average_rating)
+  end
+
   def avatar_url
     if avatar.attached?
       avatar
