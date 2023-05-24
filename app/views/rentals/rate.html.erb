@@ -1,0 +1,8 @@
+<h1>Rate your rental</h1>
+
+<%= form_for @rental, url: rating_rental_path(@rental), method: :patch do |f| %>
+  <%= f.label :rating, 'Rating' %>
+  <%= f.number_field :rating, in: 1..5 %>
+
+  <%= f.submit 'Submit Rating' %>
+<% end %>
