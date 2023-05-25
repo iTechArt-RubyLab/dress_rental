@@ -36,8 +36,8 @@ class RentalsController < ApplicationController
 
   def update_rating
     @rental = Rental.find(params[:rental_id])
-    @rental.update(rental_params)
-    Salon.update_salon_rating(@rental.product.salon)
+    @rental.update(rating_params)
+    @rental.product.salon.update_salon_rating
     redirect_to @rental.product.salon, notice: 'Thank you for rating your rental!'
   end
 
@@ -75,6 +75,10 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    params.require(:rental).permit(:start_date, :end_date, :product_id, :status, :user_rating)
+    params.require(:rental).permit(:start_date, :end_date, :product_id, :status)
+  end
+
+  def rating_params
+    params.require(:rental).permit( :user_rating)
   end
 end
