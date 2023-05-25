@@ -3,6 +3,7 @@
 <% @archived_rentals = @user.rentals.archived %>
 
 <h1>Welcome, <%= @user.email%>!</h1>
+<p>Rating: <%= @user.rating%></p>
 
 <% if @user.rentals.any? %>
   <h3>Rentals:</h3>

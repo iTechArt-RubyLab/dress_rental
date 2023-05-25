@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_09_075131) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_124055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_075131) do
     t.string "confirmation_token"
     t.datetime "confirmation_sent_at"
     t.integer "status", default: 1
+    t.float "total_price"
+    t.integer "user_rating"
+    t.integer "salon_rating"
     t.index ["product_id"], name: "index_rentals_on_product_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end
@@ -98,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_075131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
+    t.float "rating"
     t.index ["owner_id"], name: "index_salons_on_owner_id"
   end
 
@@ -122,6 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_09_075131) do
     t.string "username"
     t.string "avatar"
     t.integer "role_type"
+    t.float "rating"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
