@@ -36,7 +36,7 @@ class RentalsController < ApplicationController
 
   def update_rating
     @rental = Rental.find(params[:rental_id])
-    @rental.update(user_rating: params[:rental][:user_rating])
+    @rental.update(rental_params)
     Salon.update_salon_rating(@rental.product.salon)
     redirect_to @rental.product.salon, notice: 'Thank you for rating your rental!'
   end

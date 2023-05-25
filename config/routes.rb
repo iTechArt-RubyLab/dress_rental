@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   resources :rentals, only: %i[show new create edit update destroy] do
     get :export_csv, on: :collection
     get :rate_salon, on: :member
-    post 'update_rating'
+    post :update_rating
     get 'confirm/:confirmation_token', to: 'rentals#confirm'
   end
 end

@@ -17,7 +17,8 @@ class Rental < ApplicationRecord
   private
 
   def calculate_total_price
-    self.total_price = RentalPriceCalculator.call(start_date: start_date, end_date: end_date, product_price: product.price).result
+    self.total_price = RentalPriceCalculator.call(start_date:, end_date:,
+                                                  product_price: product.price).result
   end
 
   def product_available
