@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create edit update destroy rate]
-  before_action :set_rental, only: %i[show edit update destroy rate]
+  before_action :authenticate_user!, only: %i[new create edit update destroy rate_salon]
+  before_action :set_rental, only: %i[show edit update destroy rate_salon]
 
   def new
     @rental = Rental.new
@@ -31,6 +31,12 @@ class RentalsController < ApplicationController
   end
 
   def rate_salon
+    render 'rentals/rate_salon'
+  end
+
+  def update_rating
+    @rental = Rental.find(params[:rental_id])
+    @rental.update(user_rating: params[:rental][:user_rating])
     Salon.update_salon_rating(@rental.product.salon)
     redirect_to @rental.product.salon, notice: 'Thank you for rating your rental!'
   end
@@ -69,6 +75,6 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    params.require(:rental).permit(:start_date, :end_date, :product_id, :status)
+    params.require(:rental).permit(:start_date, :end_date, :product_id, :status, :user_rating)
   end
 end
