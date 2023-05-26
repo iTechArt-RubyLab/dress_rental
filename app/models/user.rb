@@ -23,8 +23,8 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-    average_rating = self.rentals.where.not(salon_rating: nil).average(:salon_rating)
-    self.update(rating: average_rating)
+    average_rating = rentals.where.not(salon_rating: nil).average(:salon_rating)
+    update(rating: average_rating)
   end
 
   def avatar_url

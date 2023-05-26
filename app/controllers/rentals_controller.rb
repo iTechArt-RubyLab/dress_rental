@@ -79,6 +79,6 @@ class RentalsController < ApplicationController
   end
 
   def rating_params
-    params.require(:rental).permit( :user_rating)
+    params.require(:rental).permit(:user_rating)
   end
 end
