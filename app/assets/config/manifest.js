@@ -5,3 +5,4 @@
 //= link default-product-photo.png
 //= link logo.png
 //= link sign_up-photo.jpg
+//= link default-bride-salon-photo.jpg
