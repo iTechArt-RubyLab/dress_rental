@@ -1,42 +1,46 @@
-<div class="container 2">
+<div class="container-fluid mt-3 mx-auto">
   <div class="row">
-    <div class="col-12 col-md-10">
-      <%= render @salon %>
-      <% if @salon.rating %>
-        <h4 class="my-3">Rating: <%= @salon.rating.round(1)%></h4>
-      <% else %>
-        <h4 class="my-3">This salon doesn't have any ratings yet!</h4>
-      <% end %>
+    <div class="col-12">
+      <div class="row justify-content-center mb-3">
+        <div class="col-12 col-md-8">
+          <%= render @salon %>
+          <% if @salon.rating %>
+            <h4 class="my-3">Rating: <%= @salon.rating.round(1)%></h4>
+          <% else %>
+            <h4 class="my-3">This salon doesn't have any ratings yet!</h4>
+          <% end %>
+        </div>
+      </div>
 
-  <% @salon.products.each_slice(3) do |products_slice| %>
-    <div class="row justify-content-center">
-      <% products_slice.each do |product| %>
-        <div class="col-md-6">
-          <div class="card">
-            <%= image_tag product.photo_url(:medium), class: "card-img-top", width: "40", height: "320", style: "object-fit: cover"%>
-            <div class="card-body">
-              <h5 class="card-title"><%= product.name %></h5>
-              <p class="card-text"><%= number_to_currency(product.price) %></p>
+      <% @salon.products.each_slice(3) do |products_slice| %>
+        <div class="row justify-content-center">
+          <% products_slice.each do |product| %>
+            <div class="col-md-3">
+              <div class="card mb-3">
+                <%= image_tag product.photo_url(:medium), class: "card-img-top", style: "object-fit:cover;" %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name %></h5>
+                  <p class="card-text"><%= number_to_currency(product.price) %></p>
+                </div>
+                <div class="card-footer">
+                  <%= link_to "Show this product", product, class: "btn btn-primary" %>
+                  <% if user_signed_in? %>
+                    <% if current_user.admin? %>
+                      <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
+                      <%= link_to 'Destroy', admin_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                    <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
+                      <%= link_to 'Edit',  edit_owner_product_path(product), class: "btn btn-secondary" %>
+                      <%= link_to 'Destroy', owner_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
             </div>
-            <div class="card-footer">
-              <%= link_to "Show this product", product, class: "btn btn-primary" %>
-              <% if user_signed_in? %>
-                <% if current_user.admin? %>
-                  <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
-                  <%= link_to 'Destroy', admin_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-                <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
-                  <%= link_to 'Edit',  edit_owner_product_path(product), class: "btn btn-secondary" %>
-                  <%= link_to 'Destroy', owner_product_path(product.id), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
-    </div>
-  <% end %>
 
-      <div class="my-3">
+            <div class="my-3">
         <h2>Comments</h2>
         <% if @salon.comments.any? %>
           <% @salon.comments.each do |comment| %>
