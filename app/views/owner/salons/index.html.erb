@@ -1,4 +1,4 @@
-<h1>Список салонов</h1>
+<h1>Owned salons list</h1>
 <% current_user.salons.each do |salon| %>
   <p><%= salon.name %></p>
   <% if salon.products.flat_map(&:rentals) %>
@@ -21,8 +21,8 @@
             <td><%= rental.end_date %></td>
             <td><%= rental.user.email %></td>
             <td><%= link_to "Rate user", rate_user_rental_path(rental), class: 'btn btn-warning' %></td>
-            <td><%= link_to "Edit", edit_admin_rental_path(rental), class: 'btn btn-warning' %></td>
-            <td><%= link_to "Destroy", admin_rental_path(rental), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
+            <td><%= link_to "Edit", edit_owner_rental_path(rental), class: 'btn btn-warning' %></td>
+            <td><%= link_to "Destroy", owner_rental_path(rental), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
           </tr>
         <% end %>
       </tbody>

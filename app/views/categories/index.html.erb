@@ -1,5 +1,5 @@
-<div class="container">
-  <h1 class="text-center mb-4">Categories</h1>
+<div class="container mt-4">
+  <h1 class="text-center mb-6">Categories</h1>
   <div class="row justify-content-center">
     <% @categories.each do |category| %>
       <div class="col-lg-5 col-md-6 mb-4 mx-3">
@@ -13,7 +13,6 @@
             <%= link_to "Explore this category", category, class: "btn btn-primary" %>
             <% if current_user&.admin? %>
               <%= link_to 'Edit',  edit_admin_category_path(category), class: "btn btn-secondary" %>  
-              <%= link_to 'Destroy', admin_category_path(category), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
             <% end %>
           </div>
         </div>

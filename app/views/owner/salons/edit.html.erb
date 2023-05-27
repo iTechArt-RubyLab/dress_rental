@@ -3,7 +3,8 @@
 <%= render 'form', salon: @salon %>
 
 <% if current_user&.owner? %>
-  <p><%= link_to 'Add new product',  new_owner_salon_product_path(@salon) %></p>
+  <%= link_to 'Add new product',  new_owner_salon_product_path(@salon) %>
+  <%= link_to 'Destroy', owner_salon_path(@salon), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
 <% end %>
 
 <div>

@@ -16,10 +16,8 @@
           <% if user_signed_in? %>
             <% if current_user&.admin? %>
               <%= link_to 'Edit',  edit_admin_salon_path(salon), class: "btn btn-secondary" %>  
-              <%= link_to 'Destroy', admin_salon_path(salon), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
             <% elsif current_user.salons.include?(salon) %>
               <%= link_to 'Edit',  edit_owner_salon_path(salon), class: "btn btn-secondary" %>  
-              <%= link_to 'Destroy', owner_salon_path(salon), class: "btn btn-danger",  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
             <% end %>
           <% end %>
         </div>
