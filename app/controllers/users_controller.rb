@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def request_owner_access
     RequestOwnerAccessWorker.perform_async(current_user.id)
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: 'Request letter was send to admin. Thank you for trusting us!'
   end
 
   private

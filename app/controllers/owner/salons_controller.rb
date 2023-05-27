@@ -7,6 +7,10 @@ module Owner
       @salon = Salon.new
     end
 
+    def index 
+      @salons = current_user.salons
+    end
+
     def create
       @salon = Salon.new(salon_params)
 

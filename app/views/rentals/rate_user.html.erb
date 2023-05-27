@@ -1,0 +1,7 @@
+<h1>Rate your experience with this customer</h1>
+
+<%= form_for @rental, url: rental_update_user_rating_path(@rental), method: :post do |f| %>
+  <%= f.label :salon_rating %>
+  <%= f.number_field :salon_rating, min: 1, max: 5 %>
+  <%= f.submit "Rate User" %>
+<% end %>
