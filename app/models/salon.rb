@@ -5,7 +5,7 @@ class Salon < ApplicationRecord
 
   def update_salon_rating
     product_ids = self.products.pluck(:id)
-    average_rating = Rental.where(product_id: product_ids).where.not(user_rating: nil).average(:user_rating)
+    average_rating = Rental.rated_by_users_rentals(product_ids).average(:user_rating)
     self.update(rating: average_rating)
   end
 end

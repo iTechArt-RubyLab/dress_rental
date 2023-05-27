@@ -23,7 +23,7 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-    average_rating = self.rentals.where.not(salon_rating: nil).average(:salon_rating)
+    average_rating = Rental.rated_by_owners_rentals.average(:salon_rating)
     self.update(rating: average_rating)
   end
 
