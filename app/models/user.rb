@@ -15,8 +15,15 @@ class User < ApplicationRecord
 
   validates :email, :phone, :first_name, :last_name, presence: true
   validates :email, uniqueness: true
-  validates :phone, format: { with: /\A\+\d{12}\z/, message: "Number should look like this: +37529xxxxxxx" }
-  validates :password, presence: true, length: { minimum: 8 }, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/, message: "must contain at least one uppercase letter, one lowercase letter, and one digit" }
+  validates :phone, format: { with: /\A\+\d{12}\z/, message: 'Number should look like this: +37529xxxxxxx' }
+  validates :password, presence: true, length: { minimum: 8 },
+                       format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/, message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
+
+  attr_accessor :username
+
+  def username
+    "#{first_name} #{last_name}"
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

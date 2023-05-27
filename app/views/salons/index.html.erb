@@ -7,10 +7,10 @@
       <div class="card h-100">
         <img src="<%= asset_path('default-bride-salon-photo.jpeg') %>"
           alt="Login image" class="w-100" style="object-fit: cover; object-position: left;">
-        <div class="card-body">
-          <h4 class="card-title">"<%= salon.name %>". Rating: <%= salon.rating %></h4>
-          <p class="card-text"><%= salon.description %></p>
-        </div>
+          <div class="card-body">
+            <h4 class="card-title"><%= salon.name %><% if salon.rating %> - Rating: <%= salon.rating %><% end %></h4>
+            <p class="card-text"><%= salon.description %></p>
+          </div>
         <div class="card-footer">
           <%= link_to "Explore this salon's products", salon, class: "btn btn-primary" %>
           <% if user_signed_in? %>
