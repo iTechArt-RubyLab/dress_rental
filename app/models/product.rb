@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  DEFAULT_PHOTO_URL = 'default-product-photo.png'.freeze
+  DEFAULT_PHOTO_URL = 'default-object-photo.png'.freeze
   has_many :product_categories
   has_many :categories, through: :product_categories
   belongs_to :salon

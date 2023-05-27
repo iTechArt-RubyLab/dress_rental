@@ -10,7 +10,7 @@
               <% products_slice.each do |product| %>
                 <div class="col-md-5">
                   <div class="card mb-3">
-                    <%= image_tag product.photo_url(:medium), class: "card-img-top", style: "object-fit:cover;" %>
+                    <%= image_tag product.photo_url(:medium), class: "card-img-top", style: "object-fit:cover;", height: '450' %>
                     <div class="card-body">
                       <h5 class="card-title"><%= product.name %></h5>
                       <p class="card-text"><%= number_to_currency(product.price) %></p>
