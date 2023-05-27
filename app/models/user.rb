@@ -33,11 +33,7 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-<<<<<<< HEAD
-    average_rating = rentals.where.not(salon_rating: nil).average(:salon_rating)
-=======
     average_rating = rentals.rated_by_owners_rentals.average(:salon_rating)
->>>>>>> add_rental_archiver
     update(rating: average_rating)
   end
 

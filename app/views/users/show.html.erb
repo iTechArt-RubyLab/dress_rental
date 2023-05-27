@@ -88,12 +88,8 @@
           </div>
         </div>
       <% end %>
-<<<<<<< HEAD
-</div>
-=======
     </ul><br>
 <% end %>
-
 <%= link_to "Edit my account", edit_user_path(@user) %>
 <%= form_with(url: request_owner_access_path, method: :post) do |form| %>
   <%= form.submit "Request owner rights" %>
@@ -102,4 +98,3 @@
 <% if @user.owner? %>
   <%= link_to "My salons", owner_salon_my_salons_path(@user) %>
 <% end %>
->>>>>>> add_rental_archiver
