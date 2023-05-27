@@ -3,7 +3,6 @@ ProductCategory.destroy_all
 Product.destroy_all
 Category.destroy_all
 Salon.destroy_all
-# User.destroy_all
 
 user_owner = User.create!(
   first_name: 'Maria',

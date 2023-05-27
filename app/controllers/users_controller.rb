@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
-      redirect_to edit_user_path(current_user), notice: 'Profile has been updated.'
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Profile has been updated.'
     else
-      render :edit, alert: 'There was a problem updating the profile.'
+      render 'shared/users/edit', alert: 'There was a problem updating the profile.'
     end
   end
 

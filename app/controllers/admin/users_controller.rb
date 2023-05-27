@@ -14,10 +14,9 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to edit_user_path(@user), notice: 'Profile successfully updated.'
+        redirect_to user_path(@user), notice: 'Profile successfully updated.'
       else
-        render :edit
-        flash.now[:error] = 'Could not save the changes.'
+        redirect_to edit_user_path(@user), alert: 'Something went wrong.'
       end
     end
 

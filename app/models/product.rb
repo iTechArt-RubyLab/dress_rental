@@ -11,7 +11,7 @@ class Product < ApplicationRecord
 
   def photo_url(_size = :medium)
     if photo.attached?
-      photo.variant(resize_to_fill: [30, 30]).processed.url
+      photo.variant(resize_to_fit: [800, 800]).processed.url
     else
       DEFAULT_PHOTO_URL
     end
