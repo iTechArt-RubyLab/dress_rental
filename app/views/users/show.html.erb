@@ -19,3 +19,7 @@
 <%= form_with(url: request_owner_access_path, method: :post) do |form| %>
   <%= form.submit "Request owner rights" %>
 <% end %>
+
+<% if @user.owner? %>
+  <%= link_to "My salons", owner_salon_my_salons_path(@user) %>
+<% end %>

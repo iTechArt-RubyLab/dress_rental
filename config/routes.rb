@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   namespace :owner do
     resources :salons, only: %i[new create edit update destroy] do
       resources :products, only: %i[new create edit update destroy]
+      get :my_salons, to: 'salons#index'
     end
     resources :products, only: %i[new create edit update destroy]
     resources :comments, only: %i[create edit update destroy]

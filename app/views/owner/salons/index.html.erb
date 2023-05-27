@@ -1,0 +1,4 @@
+<h1>Список салонов</h1>
+<% current_user.salons.each do |salon| %>
+  <p><%= salon.name %></p>
+<% end %>
