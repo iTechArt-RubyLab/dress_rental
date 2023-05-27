@@ -23,8 +23,8 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-    average_rating = Rental.rated_by_owners_rentals.average(:salon_rating)
-    self.update(rating: average_rating)
+    average_rating = rentals.rated_by_owners_rentals.average(:salon_rating)
+    update(rating: average_rating)
   end
 
   def avatar_url
