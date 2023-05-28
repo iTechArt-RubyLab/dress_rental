@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe ExpiredRentalsArchiverWorker, type: :worker do
   describe "#perform" do
     it "archives expired rentals" do
-      rental = create(:rental, end_date: 1.day.ago, status: :active)
+      rental = create(:rental, end_date: 1.day.ago, status: :confirmed)
 
       expect {
         ExpiredRentalsArchiverWorker.new.perform
         rental.reload
-      }.to change { rental.status }.from("active").to("archived")
+      }.to change { rental.status }.from("confirmed").to("archived")
     end
 
     it "creates rental rating request worker job" do
-      rental = create(:rental, end_date: 1.day.ago, status: :active)
+      rental = create(:rental, end_date: 1.day.ago, status: :confirmed)
 
       expect {
         ExpiredRentalsArchiverWorker.new.perform

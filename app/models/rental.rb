@@ -8,7 +8,7 @@ class Rental < ApplicationRecord
   validates :end_date, presence: true, comparison: { greater_than_or_equal_to: :start_date }
   validate :product_available
 
-  enum status: { unconfirmed: 1, confirmed: 2, active: 3, archived: 4 }
+  enum status: { unconfirmed: 1, confirmed: 2, archived: 3 }
 
   scope :rated_by_users_rentals, ->(product_ids) { Rental.where(product_id: product_ids).where.not(user_rating: nil) }
   scope :rated_by_owners_rentals, -> { where.not(salon_rating: nil) }

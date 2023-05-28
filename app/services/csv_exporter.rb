@@ -2,7 +2,7 @@ require 'csv'
 class CsvExporter < Patterns::Service
   def self.call(rentals)
     CSV.generate do |csv|
-      csv << ['Product name', 'Month', 'Total price, $', 'Average duration, days']
+      csv << ["Product name", "Month", "Total price ($)", "Average duration (days)"]
 
       rentals_by_month = rentals.group_by { |r| [r.product.name, r.start_date.month] }
       rentals_by_month.each do |(product_name, month), list|

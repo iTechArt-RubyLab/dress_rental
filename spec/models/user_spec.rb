@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:phone) }
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
-  it { should validate_uniqueness_of(:email) }
+  it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_length_of(:password).is_at_least(8) }
   it { should allow_value("+375291234567").for(:phone) }
   it { should_not allow_value("291234567").for(:phone) }
@@ -46,6 +46,7 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
 
   describe "#update_user_rating" do
     let(:salon) { FactoryBot.create(:salon, owner_id: user.id) }
