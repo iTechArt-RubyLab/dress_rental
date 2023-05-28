@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
   DEFAULT_PHOTO_URL = 'default-object-photo.png'.freeze
-  has_many :product_categories
+  has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
   belongs_to :salon
-  has_many :rentals
+  has_many :rentals, dependent: :destroy
   has_many :users, through: :rentals
   has_one_attached :photo
 
