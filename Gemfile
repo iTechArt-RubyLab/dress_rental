@@ -12,6 +12,10 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 # Authentication solution for Rails with Warden
 gem 'devise', '~> 4.9', '>= 4.9.2'
 
+gem 'elasticsearch-model', '~> 6.1', '>= 6.1.2'
+
+gem 'elasticsearch-rails', '~> 6.1', '>= 6.1.2'
+
 # Authorization for Rails applications
 gem 'pundit', '~> 2.3'
 
