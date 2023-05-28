@@ -60,6 +60,8 @@ gem 'rubocop', '~> 1.50', '>= 1.50.2'
 # Rails code style checking tool
 gem 'rubocop-rails', '~> 2.19', '>= 2.19.1'
 
+gem 'faker', '~> 3.2'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
@@ -80,9 +82,6 @@ gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
-
-# Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -107,6 +106,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 5.3'
 end
 
 group :development do
