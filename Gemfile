@@ -42,6 +42,9 @@ gem 'sidekiq', '~> 7.1'
 # Job scheduling extension for Sidekiq
 gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.2'
 
+# Code coverage analysis tool for Ruby
+gem 'simplecov', '~> 0.22.0'
+
 # A Ruby client that tries to match Redis' API one-to-one
 gem 'redis', '~> 5.0', '>= 5.0.6'
 
