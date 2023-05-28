@@ -1,6 +1,6 @@
 class RentalsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
-  before_action :set_rental, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy rate_salon rate_user]
+  before_action :set_rental, only: %i[show edit update destroy rate_salon rate_user]
 
   def new
     @rental = Rental.new
@@ -28,6 +28,28 @@ class RentalsController < ApplicationController
     else
       redirect_to root_url, alert: 'Invalid confirmation token.'
     end
+  end
+
+  def rate_salon
+    render 'rentals/rate_salon'
+  end
+
+  def rate_user
+    render 'rentals/rate_user'
+  end
+
+  def update_salon_rating
+    @rental = Rental.find(params[:rental_id])
+    @rental.update(rating_params)
+    @rental.product.salon.update_salon_rating
+    redirect_to @rental.product.salon, notice: 'Thank you for your feedback!'
+  end
+
+  def update_user_rating
+    @rental = Rental.find(params[:rental_id])
+    @rental.update(rating_params)
+    @rental.user.update_user_rating
+    redirect_to @rental.product.salon, notice: 'Thank you for your feedback!'
   end
 
   def edit
@@ -65,5 +87,9 @@ class RentalsController < ApplicationController
 
   def rental_params
     params.require(:rental).permit(:start_date, :end_date, :product_id, :status)
+  end
+
+  def rating_params
+    params.require(:rental).permit(:user_rating, :salon_rating)
   end
 end

@@ -1,6 +1,7 @@
 <% @user = current_user %>
 
 <h1>Welcome, <%= @user.email%>!</h1>
+<p>Rating: <%= @user.rating%></p>
 <% if @user.rentals.empty? %>
     <p>You do not have any rentals! </p>
 <% elsif @user.rentals%>
@@ -17,4 +18,8 @@
 <%= link_to "Edit my account", edit_user_path(@user) %>
 <%= form_with(url: request_owner_access_path, method: :post) do |form| %>
   <%= form.submit "Request owner rights" %>
+<% end %>
+
+<% if @user.owner? %>
+  <%= link_to "My salons", owner_salon_my_salons_path(@user) %>
 <% end %>

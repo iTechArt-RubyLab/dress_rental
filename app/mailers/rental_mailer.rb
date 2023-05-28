@@ -19,4 +19,11 @@ class RentalMailer < ApplicationMailer
       format.html { render 'mailer/rental_mailer/rental_expiration_notification' }
     end
   end
+
+  def rental_rating_request_notification(rental)
+    @rental = rental
+    mail(to: @rental.user.email, subject: 'Please, rate your rental!') do |format|
+      format.html { render 'mailer/rental_mailer/rental_rating_request_notification' }
+    end
+  end
 end

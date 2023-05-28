@@ -22,6 +22,11 @@ class User < ApplicationRecord
     end
   end
 
+  def update_user_rating
+    average_rating = rentals.rated_by_owners_rentals.average(:salon_rating)
+    update(rating: average_rating)
+  end
+
   def avatar_url
     if avatar.attached?
       avatar
