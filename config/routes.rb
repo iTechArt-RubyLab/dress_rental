@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
@@ -59,4 +61,6 @@ Rails.application.routes.draw do
     post :update_user_rating
     get 'confirm/:confirmation_token', to: 'rentals#confirm'
   end
+
+  mount Sidekiq::Web => "/sidekiq"
 end
