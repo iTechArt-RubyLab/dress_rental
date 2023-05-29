@@ -7,6 +7,10 @@ class ProductsController < ApplicationController
 
   def show; end
 
+  def search
+    @products = ProductSearch.call(query: params[:query]).result.to_a
+  end
+
   private
 
   def set_product

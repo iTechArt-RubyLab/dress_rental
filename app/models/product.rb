@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   belongs_to :salon
   has_many :rentals
   has_many :users, through: :rentals
-  # has_one_attached :photo
+  has_one_attached :photo
 
   validates :name, :price, :description, presence: true
 

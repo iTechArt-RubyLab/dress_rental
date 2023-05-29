@@ -1,0 +1,11 @@
+<h1>Search results for "<%= params[:query] %>"</h1>
+
+<% if @products.any? %>
+  <ul>
+    <% @products.each do |product| %>
+      <li><%= link_to product.name, product_path(product) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products found.</p>
+<% end %>
