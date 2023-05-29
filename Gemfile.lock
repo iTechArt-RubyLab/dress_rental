@@ -151,10 +151,8 @@ GEM
     execjs (2.8.1)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
-    faraday (2.7.4)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (0.17.6)
+      multipart-post (>= 1.2, < 3)
     ffi (1.15.5)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
@@ -197,6 +195,7 @@ GEM
     msgpack (1.7.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
+    multipart-post (2.3.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -419,6 +418,7 @@ DEPENDENCIES
   elasticsearch-model (~> 6.1, >= 6.1.2)
   elasticsearch-rails (~> 6.1, >= 6.1.2)
   factory_bot (~> 6.2, >= 6.2.1)
+  faraday (~> 0.17.3)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

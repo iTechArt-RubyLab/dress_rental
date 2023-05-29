@@ -55,6 +55,8 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 # A collection of lightweight, standardized, rails-oriented patterns. Used for services
 gem 'rails-patterns', '~> 0.11.0'
 
+gem 'faraday', '~> 0.17.3'
+
 # Code style checking and code formatting tool
 gem 'rubocop', '~> 1.50', '>= 1.50.2'
 
