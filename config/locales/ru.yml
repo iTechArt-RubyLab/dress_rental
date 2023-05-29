@@ -1,0 +1,31 @@
+ru:
+  navbar:
+    products: 'Продукты'
+    categories: 'Категории'
+    salons: 'Салоны'
+    rentals: 'Аренды'
+    users: 'Пользователи'
+    sign_up: 'Регистрация'
+    account: 'Мой профиль'
+    log_in: 'Войти'
+    log_out: 'Выйти'
+  products:
+    index:
+      title: "Список товаров"
+      description: "Это страница со списком товаров"
+  views:
+    products: "Товары"
+    show_this_product: "Просмотреть товар"
+    edit: "Редактировать"
+    export_rentals_statistics: "Экспорт статистики аренд"
+    rentals_statistics_description: "Чтобы помочь вам принять решение, мы рады предоставить вам файл CSV со статистикой аренды наших товаров. Просто нажмите на кнопку ниже, чтобы скачать нашу историю аренды и узнать о самых популярных товарах прошлых сезонов! Спасибо, что выбрали наш салон!"
+    download: "Скачать"
+
+  product_details:
+    rent_now: 'Арендовать'
+    back_to_products: 'Назад к продуктам'
+
+  switch_language: "Сменить язык: "
+  search: "Поиск"
+
+    
