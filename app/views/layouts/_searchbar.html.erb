@@ -1,0 +1,6 @@
+<%= form_for :query, url: search_products_path, method: :get do |form| %>
+  <p>
+    <%= text_field_tag :query, params[:query], class: "search-input" %>
+    <%= submit_tag "Search", name: nil, class: "search-button" %>
+  </p>
+<% end %>
