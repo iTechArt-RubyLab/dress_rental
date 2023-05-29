@@ -15,9 +15,9 @@ module Owner
 
       respond_to do |format|
         if @product.save
-          format.html { redirect_to product_url(@product), notice: 'Product was successfully created.' }
+          redirect_to @product, notice: 'Product was successfully created.' 
         else
-          format.html { render :new, status: :unprocessable_entity }
+          render :new, status: :unprocessable_entity 
         end
       end
     end
@@ -25,11 +25,9 @@ module Owner
     def update
       respond_to do |format|
         if @product.update(product_params)
-          format.html { redirect_to product_url(@product), notice: 'Product was successfully updated.' }
+          redirect_to product_url(@product), notice: 'Product was successfully updated.' 
         else
-          format.html do
-            redirect_to edit_admin_product_path(@product), alert: 'There was an error while updating the product.'
-          end
+          redirect_to edit_admin_product_path(@product), alert: 'There was an error while updating the product.'
         end
       end
     end

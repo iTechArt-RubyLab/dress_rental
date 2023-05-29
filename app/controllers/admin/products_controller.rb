@@ -11,7 +11,6 @@ module Admin
 
     def create
       @product = @salon.products.build(product_params)
-      @product.salon = @salon
 
       respond_to do |format|
         if @product.save

@@ -27,7 +27,7 @@ module Admin
     end
 
     def update
-      @rental.assign_attributes(rental_params)
+      # @rental.assign_attributes(rental_params)
       if @rental.update(rental_params)
         redirect_to @rental
       else
