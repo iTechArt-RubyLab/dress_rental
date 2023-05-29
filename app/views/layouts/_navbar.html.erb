@@ -1,7 +1,7 @@
 <header>
   <div class='top-bar'>
     <nav>
-      <ul>
+      <ul class="d-flex justify-content-between align-items-center">
         <li>
           <%= link_to t('navbar.products'), products_path %>
         </li>
@@ -11,29 +11,51 @@
         <li>
           <%= link_to t('navbar.salons'), salons_path %>
         </li>
+        <% if current_user&.admin? %>
+          <li>
+            <%= link_to t('navbar.rentals'), admin_rentals_path %>
+          </li>
+          <li>
+            <%= link_to t('navbar.users'), admin_users_path %>
+          </li>  
+          <% end %>
+
         <li>
-          <% if current_user&.admin? %><%= link_to t('navbar.rentals'), admin_rentals_path %><% end %>
+          <% if I18n.locale == :en %>
+            <%= link_to "Русский", url_for(locale: :ru) %>
+          <% elsif I18n.locale == :ru %>
+            <%= link_to "English", url_for(locale: :en) %>
+          <% end %>
         </li>
+        
+          <% if !user_signed_in? %>
+          <li>
+            <%= link_to t('navbar.sign_up'), new_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to t('navbar.log_in'), new_user_session_path %>
+          </li>
+          <% else %>
+          <li>
+              <%= link_to t('navbar.log_out'), destroy_user_session_path, data: { turbo_method: :delete } %>
+          <% end %>
+          </li>
+
         <li>
-          <% if current_user&.admin? %><%= link_to t('navbar.users'), admin_users_path %><% end %>
-        </li>
-        <li>
-          <% if !user_signed_in? %><%= link_to t('navbar.sign_up'), new_user_registration_path %><% end %>
-        </li>
-        <li>
-          <% if current_user %>
-            <%= link_to t('navbar.account'), user_path(current_user.id) %>
-            <%= link_to image_tag(current_user.avatar_url, alt: 'User avatar', class: 'avatar'), user_path(current_user.id) %>
+          <%= form_for :query, url: search_products_path, method: :get, html: { class: "form-inline" } do |form| %>
+            <div class="d-flex justify-content-end align-items-center">
+              <%= text_field_tag :query, params[:query], class: "form-control mr-sm-2", placeholder: t('search') %>
+              <%= submit_tag t('search'), name: nil, class: "btn btn-primary my-2 my-sm-0 mr-sm-2" %>
+            </div>
           <% end %>
         </li>
 
         <li>
-          <% if !user_signed_in? %>
-            <%= link_to t('navbar.log_in'), new_user_session_path %>
-          <% else %>
-            <%= link_to t('navbar.log_out'), destroy_user_session_path, data: { turbo_method: :delete } %>
+          <% if current_user %>
+            <%= link_to image_tag(current_user.avatar_url, alt: 'User avatar', class: 'avatar'), user_path(current_user.id) %>
           <% end %>
         </li>
       </ul>
     </nav>
+  </div>
 </header>
