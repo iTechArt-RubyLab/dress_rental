@@ -1,4 +1,14 @@
 en:
+  navbar:
+    products: 'Products'
+    categories: 'Categories'
+    salons: 'Salons'
+    rentals: 'Rentals'
+    users: 'Users'
+    sign_up: 'Sign up'
+    account: 'Account'
+    log_in: 'Log in'
+    log_out: 'Log out'
   products:
     index:
       title: "Product list"
@@ -10,3 +20,10 @@ en:
     export_rentals_statistics: "Export rentals statistics"
     rentals_statistics_description: "To help you make up your mind, we are happy to provide you with a CSV file of our rental statistics. Simply click the button below to download our rental history and get to know the most popular products of the previous seasons! Thank you for choosing our salon for your wedding dress needs!"
     download: "Download"
+  product_details:
+    rent_now: 'Rent Now'
+    back_to_products: 'Back to Products'
+
+  switch_language: "Switch Language: "
+  search: "Search"
+  
