@@ -11,8 +11,7 @@ module Owner
     def edit; end
 
     def create
-      @product = Product.new(product_params)
-      @product.salon = @salon
+      @product = @salon.products.build(product_params) 
 
       respond_to do |format|
         if @product.save
