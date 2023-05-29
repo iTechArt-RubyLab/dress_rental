@@ -1,24 +1,38 @@
-<h1>Salons</h1>
-
-<% if current_user&.admin? %>
-  <h3><%= link_to 'Create new salon', new_admin_salon_path %></h3>
-<% elsif current_user&.owner? %>
-  <h3><%= link_to 'Create new salon', new_owner_salon_path %></h3>
-<% end %>
-
-
-<div>
+<div class="mx-auto row mt-2">
+  <div class="col-lg-12">
+    <h1 class="text-center mb-4">Salons</h1>
+  </div>
   <% @salons.each do |salon| %>
-    <%= render salon %>
-    <p>
-      <%= link_to "Explore this salon's products", salon %>
-    </p>
-    <% if user_signed_in? %>
-      <% if current_user&.admin? %>
-        <p><%= link_to 'Edit',  edit_admin_salon_path(salon) %>  <%= link_to 'Destroy', admin_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-      <% elsif current_user.salons.include?(salon) %>
-        <p><%= link_to 'Edit',  edit_owner_salon_path(salon) %>  <%= link_to 'Destroy', owner_salon_path(salon) , data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></p>
-      <% end %>
-    <% end %>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100">
+        <img src="<%= asset_path('default-bride-salon-photo.jpeg') %>"
+          alt="Login image" class="w-100" style="object-fit: cover; object-position: left;">
+          <div class="card-body">
+            <h4 class="card-title"><%= salon.name %><% if salon.rating %> - Rating: <%= salon.rating.round(1) %><% end %></h4>
+            <p class="card-text"><%= salon.description %></p>
+          </div>
+        <div class="card-footer">
+          <%= link_to "Explore this salon's products", salon, class: "btn btn-primary" %>
+          <% if user_signed_in? %>
+            <% if current_user&.admin? %>
+              <%= link_to 'Edit',  edit_admin_salon_path(salon), class: "btn btn-secondary" %>  
+            <% elsif current_user.salons.include?(salon) %>
+              <%= link_to 'Edit',  edit_owner_salon_path(salon), class: "btn btn-secondary" %>  
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
+    <div class="col-lg-12">
+      <% if current_user&.admin? %>
+        <div class="text-center mb-4">
+          <%= link_to 'Create new salon', new_admin_salon_path, class: "btn btn-primary" %>
+        </div>
+      <% elsif current_user&.owner? %>
+        <div class="text-center mb-4">
+          <%= link_to 'Create new salon', new_owner_salon_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
 </div>

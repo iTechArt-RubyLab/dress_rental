@@ -13,7 +13,15 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :salons, class_name: 'Salon', foreign_key: 'owner_id', dependent: :destroy
 
-  validates :email, presence: true
+  validates :email, :phone, :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
+  validates :phone, format: { with: /\A\+\d{12}\z/, message: 'Number should look like this: +37529xxxxxxx' }
+  validates :password, presence: true, allow_blank: true, length: { minimum: 8 },
+                       format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/, message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
+
+  def username
+    "#{first_name} #{last_name}"
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -23,8 +31,8 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-    average_rating = rentals.rated_by_owners_rentals.average(:salon_rating)
-    update(rating: average_rating)
+    average_rating = self.rentals.rated_by_owners_rentals.average(:salon_rating)
+    self.update!(rating: average_rating)
   end
 
   def avatar_url

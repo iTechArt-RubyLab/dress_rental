@@ -8,16 +8,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
-      redirect_to edit_user_path(current_user), notice: 'Profile has been updated.'
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Profile has been updated.'
     else
-      render :edit, alert: 'There was a problem updating the profile.'
+      render 'shared/users/edit', alert: 'There was a problem updating the profile.'
     end
   end
 
   def request_owner_access
     RequestOwnerAccessWorker.perform_async(current_user.id)
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: 'Request letter was send to admin. Thank you for trusting us!'
   end
 
   private
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :phone_number, :password, :password_confirmation, :role, :avatar,
+    params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :password, :password_confirmation, :role, :avatar,
                                  :rating)
   end
 end

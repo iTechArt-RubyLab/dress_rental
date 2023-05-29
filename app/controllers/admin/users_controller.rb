@@ -14,10 +14,9 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to edit_user_path(@user), notice: 'Profile successfully updated.'
+        redirect_to user_path(@user), notice: 'Profile successfully updated.'
       else
-        render :edit
-        flash.now[:error] = 'Could not save the changes.'
+        redirect_to edit_user_path(@user), alert: 'Something went wrong.'
       end
     end
 
@@ -44,7 +43,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :phone_number, :password, :role, :avatar)
+      params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :password, :role, :avatar)
     end
   end
 end
