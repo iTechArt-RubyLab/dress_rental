@@ -1,6 +1,6 @@
-<%= form_for :query, url: search_products_path, method: :get do |form| %>
-  <p>
-    <%= text_field_tag :query, params[:query], class: "search-input" %>
-    <%= submit_tag "Search", name: nil, class: "search-button" %>
-  </p>
-<% end %>
+<div class="d-flex justify-content-end">
+  <%= form_for :query, url: search_products_path, method: :get, html: { class: "form-inline my-2 my-lg-0 flex-row-reverse" } do |form| %>
+    <%= text_field_tag :query, params[:query], class: "form-control mr-sm-2", placeholder: "Search" %>
+    <%= submit_tag "Search", name: nil, class: "btn btn-primary my-2 my-sm-0" %>
+  <% end %>
+</div>
