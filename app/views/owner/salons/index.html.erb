@@ -21,8 +21,6 @@
             <td><%= rental.end_date %></td>
             <td><%= rental.user.email %></td>
             <td><%= link_to "Rate user", rate_user_rental_path(rental), class: 'btn btn-warning' %></td>
-            <td><%= link_to "Edit", edit_owner_rental_path(rental), class: 'btn btn-warning' %></td>
-            <td><%= link_to "Destroy", owner_rental_path(rental), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
           </tr>
         <% end %>
       </tbody>
