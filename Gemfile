@@ -34,6 +34,8 @@ gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
 # Provides a framework and DSL for defining and using factories
 gem 'factory_bot', '~> 6.2', '>= 6.2.1'
 
+gem 'i18n', '~> 1.13'
+
 # Official AWS Ruby gem for Amazon Simple Storage Service (Amazon S3)
 gem 'aws-sdk-s3'
 
