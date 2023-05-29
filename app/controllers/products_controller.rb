@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show]
 
   def index
+    I18n.locale = params[:locale] || I18n.default_locale
     @products = Product.all
   end
 

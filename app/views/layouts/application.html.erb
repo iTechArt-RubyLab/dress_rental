@@ -17,6 +17,8 @@
       <%= render 'layouts/flash' %>
     <body>
       <%= render 'layouts/searchbar' %>
+      <%= link_to "English", url_for(locale: :en) %>
+      <%= link_to "Русский", url_for(locale: :ru) %>
       <%= yield %>
     </body>
   </body>

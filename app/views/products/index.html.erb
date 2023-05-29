@@ -1,5 +1,5 @@
 <div class="card-deck text-center mt-2">
-<h1>Products</h1>
+  <h1><%= t('views.products') %></h1>
   <% @products.each_slice(3) do |products_slice| %>
     <div class="row justify-content-center">
       <% products_slice.each do |product| %>
@@ -11,12 +11,12 @@
               <p class="card-text"><%= number_to_currency(product.price) %></p>
             </div>
             <div class="card-footer">
-              <%= link_to "Show this product", product, class: "btn btn-primary" %>
+             <%= link_to product_path(product, locale: I18n.locale), class: "btn btn-primary" do %> <%= t('views.show_this_product') %><% end %>
               <% if user_signed_in? %>
                 <% if current_user.admin? %>
-                  <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
+                  <%= link_to t('views.edit'),  edit_admin_product_path(product), class: "btn btn-secondary" %>
                 <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
-                  <%= link_to 'Edit',  edit_owner_product_path(product), class: "btn btn-secondary" %>
+                  <%= link_to t('views.edit'),  edit_owner_product_path(product), class: "btn btn-secondary" %>
                 <% end %>
               <% end %>
             </div>
@@ -28,8 +28,8 @@
 </div>
 <div class="card mt-4">
   <div class="card-body">
-    <h5 class="card-title">Export rentals statistics</h5>
-    <p class="card-text">To help you keep make up your mind, we are happy to provide you with a CSV file of our rental statistics. Simply click the button below to download our rental history and get to know the most popular products of the previous seasons! Thank you for choosing our salon for your wedding dress needs!</p>
-    <%= link_to 'Download', export_csv_rentals_path, class: 'btn btn-primary' %>
+    <h5 class="card-title"><%= t('views.export_rentals_statistics') %></h5>
+    <p class="card-text"><%= t('views.rentals_statistics_description') %></p>
+    <%= link_to t('views.download'), export_csv_rentals_path, class: 'btn btn-primary' %>
   </div>
 </div>
