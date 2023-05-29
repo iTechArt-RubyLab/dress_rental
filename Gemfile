@@ -12,6 +12,10 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 # Authentication solution for Rails with Warden
 gem 'devise', '~> 4.9', '>= 4.9.2'
 
+gem 'elasticsearch-model', '~> 6.1', '>= 6.1.2'
+
+gem 'elasticsearch-rails', '~> 6.1', '>= 6.1.2'
+
 # Authorization for Rails applications
 gem 'pundit', '~> 2.3'
 
@@ -50,6 +54,8 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 
 # A collection of lightweight, standardized, rails-oriented patterns. Used for services
 gem 'rails-patterns', '~> 0.11.0'
+
+gem 'faraday', '~> 0.17.3'
 
 # Code style checking and code formatting tool
 gem 'rubocop', '~> 1.50', '>= 1.50.2'
