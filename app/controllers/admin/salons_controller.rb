@@ -9,12 +9,10 @@ module Admin
     def create
       @salon = Salon.new(salon_params)
 
-      respond_to do |format|
-        if @salon.save
-          format.html { redirect_to salon_path(@salon), notice: 'Salon was successfully created.' }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-        end
+      if @salon.save
+        redirect_to salon_path(@salon), notice: 'Salon was successfully created.' 
+      else
+        render :new, status: :unprocessable_entity 
       end
     end
 
@@ -22,22 +20,16 @@ module Admin
 
     def update
       if @salon.update(salon_params)
-        respond_to do |format|
-          format.html { redirect_to salon_path(@salon), notice: 'Salon was successfully updated.' }
-        end
+        redirect_to salon_path(@salon), notice: 'Salon was successfully updated.' 
       else
-        respond_to do |format|
-          format.html { render :edit, alert: 'Something went wrong. Please try again.' }
-        end
+        render :edit, alert: 'Something went wrong. Please try again.' 
       end
     end
 
     def destroy
       return unless @salon.destroy
 
-      respond_to do |format|
-        format.html { redirect_to salons_path, notice: 'Salon was successfully destroyed.' }
-      end
+      redirect_to salons_path, notice: 'Salon was successfully destroyed.' 
     end
 
     private
