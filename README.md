@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Most difficult tasks👻
+- Following DRY, KISS and other principles 
+- Keeping models and migrations simple and structured 
+- Configuring elasticsearch :)
 
-Things you may want to cover:
+Most interesting😋
+- Controllers, routing and lots of debugging
+- Designing views 
+- Sidekiq and workers 
+- Manual testing
 
-* Ruby version
+If I had more time I would🥸
+- Create and use policies 
+- Create a sales system for salon owners
+- More tests 
+- Refactor models and controllers to keep them as simple as possible 
+- Design emails
+- Finish internationalization for all views
+- Configure Pagy (I have already but it suddenly crashed when I merged it into development)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+How to run: 
+git@github.com:iTechArt-RubyLab/organizer.git
+rails db:create
+rails db:migrate
+rails db:seed
+redis-server
+sidekiq
+rails s
