@@ -3,15 +3,15 @@ RSpec.describe Admin::SalonsController, type: :controller do
   let!(:owner) { create(:user) }
   let(:valid_attributes) { attributes_for(:salon, owner_id: owner.id) }
   let(:invalid_attributes) { attributes_for(:salon, name: nil) }
-  let(:salon) { create(:salon, owner: owner) }
+  let(:salon) { create(:salon, owner:) }
 
-  describe "GET #new" do
-    it "renders new template" do
+  describe 'GET #new' do
+    it 'renders new template' do
       get :new
       expect(response).to render_template :new
     end
 
-    it "assigns a new salon" do
+    it 'assigns a new salon' do
       get :new
       expect(assigns(:salon)).to be_a_new(Salon)
     end
@@ -20,9 +20,9 @@ RSpec.describe Admin::SalonsController, type: :controller do
   describe 'POST #create' do
     context 'with valid parameters' do
       it 'creates a new salon' do
-        expect {
+        expect do
           post :create, params: { salon: { name: 'Salon name', address: 'Salon address' } }
-        }.to change(Salon, :count).by(1)
+        end.to change(Salon, :count).by(1)
       end
 
       it 'redirects to the salon show page' do
@@ -38,9 +38,9 @@ RSpec.describe Admin::SalonsController, type: :controller do
 
     context 'with invalid parameters' do
       it 'does not create a new salon' do
-        expect {
+        expect do
           post :create, params: { salon: { name: '', address: '' } }
-        }.to_not change(Salon, :count)
+        end.to_not change(Salon, :count)
       end
 
       it 'renders the new template' do
@@ -50,13 +50,13 @@ RSpec.describe Admin::SalonsController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    it "renders edit template" do
+  describe 'GET #edit' do
+    it 'renders edit template' do
       get :edit, params: { id: salon.id }
       expect(response).to render_template :edit
     end
 
-    it "assigns @salon" do
+    it 'assigns @salon' do
       get :edit, params: { id: salon.id }
       expect(assigns(:salon)).to eq(salon)
     end
@@ -102,19 +102,19 @@ RSpec.describe Admin::SalonsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested salon" do
-      expect {
+  describe 'DELETE #destroy' do
+    it 'destroys the requested salon' do
+      expect do
         delete :destroy, params: { id: salon.id }
-      }.to change(Salon, :count).by(-1)
+      end.to change(Salon, :count).by(-1)
     end
 
-    it "redirects to the salon list" do
+    it 'redirects to the salon list' do
       delete :destroy, params: { id: salon.id }
       expect(response).to redirect_to salons_path
     end
 
-    it "has a notice message" do
+    it 'has a notice message' do
       delete :destroy, params: { id: salon.id }
       expect(flash[:notice]).to eq('Salon was successfully destroyed.')
     end
