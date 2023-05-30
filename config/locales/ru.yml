@@ -28,4 +28,8 @@ ru:
   switch_language: "Сменить язык: "
   search: "Поиск"
 
+  search_results: "Результаты поиска для \"%{query}\""
+  no_products_found: "Продукты не найдены."
+  edit: "Редактировать"
+
     

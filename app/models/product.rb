@@ -14,18 +14,18 @@ class Product < ApplicationRecord
 
   mapping do
     indexes :name, type: :text
+    indexes :description, type: :text
   end
 
   def self.search(query)
-    self.__elasticsearch__.search(
-      {
-        query: {
-          match: {
-            name: query
-          }
+    self.__elasticsearch__.search({
+      query: {
+        multi_match: {
+          query: query,
+          fields: [:name, :description]
         }
       }
-    )
+    })
   end
 
   def photo_url(_size = :medium)

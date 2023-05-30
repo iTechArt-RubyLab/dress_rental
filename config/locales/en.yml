@@ -26,4 +26,8 @@ en:
 
   switch_language: "Switch Language: "
   search: "Search"
+
+  search_results: "Search results for \"%{query}\""
+  no_products_found: "No products found."
+  edit: "Edit"
   
