@@ -19,6 +19,8 @@ gem 'elasticsearch-rails', '~> 6.1', '>= 6.1.2'
 # Authorization for Rails applications
 gem 'pundit', '~> 2.3'
 
+gem 'pagy', '~> 6.0', '>= 6.0.4'
+
 # Rack framework for multiple-provider authentication
 gem 'omniauth', '~> 2.1', '>= 2.1.1'
 
