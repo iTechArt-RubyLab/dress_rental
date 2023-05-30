@@ -1,5 +1,4 @@
-
-  <%= render @rental %>
+<%= render @rental %>
 <div class="d-flex justify-content-center">   
     <%= link_to "Edit this rental", edit_rental_path(@rental), class: "btn btn-light" %>
     <%= link_to 'Delete this rental', rental_path(@rental), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>    

@@ -1,31 +1,34 @@
-<h1>Owned salons list</h1>
-<% current_user.salons.each do |salon| %>
-<div class="text-center"><h2><%= salon.name %></h2></div>
-  <% if salon.products.flat_map(&:rentals).presence %>
-    <table class='table table-striped table-hover'>
-      <thead class='thead-dark'>
-        <tr>
-          <th>Product</th>
-          <th>Start date</th>
-          <th>End date</th>
-          <th>User email</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% salon.products.flat_map(&:rentals).each do |rental| %>
-          <tr>
-            <td><%= rental.product.name %></td>
-            <td><%= rental.start_date %></td>
-            <td><%= rental.end_date %></td>
-            <td><%= rental.user.email %></td>
-            <td><%= link_to "Rate user", rate_user_rental_path(rental), class: 'btn btn-warning' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>No rentals for this salon</p>
+<div class="container mt-4">
+  <h1 class="text-center mb-5 mt-2">Owned salons list</h1>
+  <% current_user.salons.each do |salon| %>
+    <div class="text-center"><h2><%= salon.name %></h2></div>
+      <% if salon.products.flat_map(&:rentals).presence %>
+        <table class='table table-striped table-hover'>
+          <thead class='thead-dark'>
+            <tr>
+              <th>Product</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>User email</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% salon.products.flat_map(&:rentals).each do |rental| %>
+              <tr>
+                <td><%= rental.product.name %></td>
+                <td><%= rental.start_date %></td>
+                <td><%= rental.end_date %></td>
+                <td><%= rental.user.email %></td>
+                <td><%= link_to "Rate user", rate_user_rental_path(rental), class: 'btn btn-warning' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>No rentals for this salon</p>
+      <% end %>
   <% end %>
-<% end %>
+
+</div>
