@@ -42,10 +42,10 @@
           </li>
 
         <li>
-          <%= form_for :query, url: search_products_path, method: :get, html: { class: "form-inline" } do |form| %>
+          <%= form_for :product_search, url: search_products_path, method: :get, html: { class: "form-inline" } do |form| %>
             <div class="d-flex justify-content-end align-items-center">
-              <%= text_field_tag :query, params[:query], class: "form-control mr-sm-2", placeholder: t('search') %>
-              <%= submit_tag t('search'), name: nil, class: "btn btn-primary my-2 my-sm-0 mr-sm-2" %>
+              <%= form.text_field :query, value: params[:query], class: "form-control mr-sm-2", placeholder: t('search') %>
+              <%= form.submit t('search'), class: "btn btn-primary my-2 my-sm-0 mr-sm-2" %>
             </div>
           <% end %>
         </li>

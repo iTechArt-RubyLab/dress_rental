@@ -30,10 +30,19 @@ module Admin
     end
 
     def destroy
-      @category.destroy
+      return unless @category.destroy
 
       respond_to do |format|
-        format.html { redirect_to admin_categories_path, notice: 'Category was successfully destroyed.' }
+        format.html { redirect_to categories_path, notice: 'Category was successfully destroyed.' }
+      end
+    end
+
+    def destroy
+      if @category.destroy
+        redirect_to categories_path, notice: 'Category was successfully destroyed.'
+      else
+        flash[:alert] = @category.errors.full_messages.join("\n")
+        render :edit
       end
     end
 
