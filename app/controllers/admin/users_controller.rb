@@ -14,7 +14,7 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to user_path(@user), notice: 'Profile successfully updated.'
+        redirect_to admin_users_path, notice: 'Profile successfully updated.'
       else
         redirect_to edit_user_path(@user), alert: 'Something went wrong.'
       end
@@ -43,7 +43,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :phone, :address, :password, :role, :avatar)
+      params.require(:user).permit(:first_name, :last_name, :email, :phone, :address, :password, :role_type, :avatar)
     end
   end
 end

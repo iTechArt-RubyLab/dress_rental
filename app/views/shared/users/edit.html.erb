@@ -25,6 +25,13 @@
       <%= f.file_field :avatar, class: "form-control" %>
     </div>
 
+    <% if current_user.admin? %>
+      <div class="mb-3">
+        <%= f.label :role_type, class: "form-label" %>
+        <%= f.select :role_type, User.role_types.keys.map{ |key| [key.humanize, key] }, {}, class: 'form-control' %>
+      </div>
+    <% end %>
+
     <%= f.submit "Update Profile", class: "btn btn-primary" %>
   <% end %>
 </div>
