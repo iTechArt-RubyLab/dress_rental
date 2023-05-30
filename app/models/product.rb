@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   require 'elasticsearch/model'
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
   DEFAULT_PHOTO_URL = 'default-object-photo.png'.freeze
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
