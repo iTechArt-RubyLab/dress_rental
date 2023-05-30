@@ -36,7 +36,7 @@ module Admin
       return unless @salon.destroy
 
       respond_to do |format|
-        format.html { redirect_to admin_salons_path, notice: 'Salon was successfully destroyed.' }
+        format.html { redirect_to salons_path, notice: 'Salon was successfully destroyed.' }
       end
     end
 
