@@ -16,7 +16,6 @@
                       <p class="card-text"><%= number_to_currency(product.price) %></p>
                     </div>
                     <div class="card-footer">
-                      <%= link_to "Show this product", product, class: "btn btn-primary" %>
                       <% if user_signed_in? %>
                         <% if current_user.admin? %>
                           <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>

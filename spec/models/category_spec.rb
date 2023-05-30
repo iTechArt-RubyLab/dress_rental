@@ -13,14 +13,14 @@ RSpec.describe Category, type: :model do
   end
 
   it 'has many product categories' do
-    product_category1 = create(:product_category, category: category)
-    product_category2 = create(:product_category, category: category)
+    product_category1 = create(:product_category, category:)
+    product_category2 = create(:product_category, category:)
     expect(category.product_categories.count).to eq(2)
   end
 
   it 'has many products' do
-    product_category1 = create(:product_category, category: category)
-    product_category2 = create(:product_category, category: category)
+    product_category1 = create(:product_category, category:)
+    product_category2 = create(:product_category, category:)
     expect(category.products.count).to eq(2)
   end
 end
