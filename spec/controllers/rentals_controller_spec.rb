@@ -154,7 +154,7 @@ RSpec.describe RentalsController, type: :controller do
       it 'updates the requested rental' do
         put :update, params: { id: rental.id, rental: new_attributes }
 
-        expect(rental.reload.start_date).to eq('2022-01-01')
+        expect(rental.reload.start_date.to_s).to eq('2022-01-01')
       end
 
       it 'redirects to the rental' do
