@@ -11,17 +11,21 @@
     </div>
   <% end %>
 
-<div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="container mt-4">
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label", style: "display: block" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label", style: "display: block" %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit "Update category", class: "btn btn-primary" %>
+      <%= link_to 'Destroy', admin_category_path(@category), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+    </div>
   </div>
-<% end %>
+<% end %> 
+
