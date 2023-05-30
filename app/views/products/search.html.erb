@@ -1,5 +1,5 @@
 <div class="card-deck text-center mt-2">
-<h1>Search results for "<%= params[:query] %>"</h1>
+  <h1><%= t('search_results', query: @query) %></h1>
   <% if @products.any? %>
     <% @products.each_slice(3) do |products_slice| %>
       <div class="row justify-content-center">
@@ -12,12 +12,12 @@
                 <p class="card-text"><%= number_to_currency(product.price) %></p>
               </div>
               <div class="card-footer">
-                <%= link_to "Show this product", product, class: "btn btn-primary" %>
+              <%= link_to "Show this product", { locale: I18n.locale, controller: 'products', action: 'show', id: product.id }, class: "btn btn-primary" %>
                 <% if user_signed_in? %>
                   <% if current_user.admin? %>
-                    <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
+                    <%= link_to t('edit'),  edit_admin_product_path(product), class: "btn btn-secondary" %>
                   <% elsif current_user.salons.joins(:products).where("products.id = ?", product.id).exists? %>
-                    <%= link_to 'Edit',  edit_owner_product_path(product), class: "btn btn-secondary" %>
+                    <%= link_to t('edit'),  edit_owner_product_path(product), class: "btn btn-secondary" %>
                   <% end %>
                 <% end %>
               </div>
@@ -27,6 +27,6 @@
       </div>
     <% end %>
   <% else %>
-    <p>No products found.</p>
+    <p><%= t('no_products_found') %></p>
   <% end %>
 </div>

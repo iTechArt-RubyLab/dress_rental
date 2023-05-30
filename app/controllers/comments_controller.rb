@@ -4,15 +4,15 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @salon.comments.build(comment_params)
-    @comment.user = current_user
     flash.now[:notice] = 'Could not save the comment!' unless @comment.save
     redirect_to @salon
   end
 
   def destroy
     @comment = @salon.comments.find(params[:id])
-    @comment.destroy
-    redirect_to @salon
+    return unless @comment.destroy
+
+    redirect_to @salon, notice: 'Comment was successfully destroyed'
   end
 
   def edit

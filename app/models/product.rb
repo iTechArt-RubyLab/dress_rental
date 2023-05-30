@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   require 'elasticsearch/model'
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
   DEFAULT_PHOTO_URL = 'default-object-photo.png'.freeze
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
@@ -14,18 +13,18 @@ class Product < ApplicationRecord
 
   mapping do
     indexes :name, type: :text
+    indexes :description, type: :text
   end
 
   def self.search(query)
-    self.__elasticsearch__.search(
-      {
-        query: {
-          match: {
-            name: query
-          }
-        }
-      }
-    )
+    __elasticsearch__.search({
+                               query: {
+                                 multi_match: {
+                                   query:,
+                                   fields: %i[name description]
+                                 }
+                               }
+                             })
   end
 
   def photo_url(_size = :medium)

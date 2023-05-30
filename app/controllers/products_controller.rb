@@ -9,7 +9,8 @@ class ProductsController < ApplicationController
   def show; end
 
   def search
-    @products = ProductSearch.call(query: params[:query]).result.to_a
+    @query = params.dig(:product_search, :query)
+    @products = ProductSearch.call(query: @query).result.to_a
   end
 
   private

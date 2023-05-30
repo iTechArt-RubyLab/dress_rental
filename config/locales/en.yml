@@ -23,7 +23,26 @@ en:
   product_details:
     rent_now: 'Rent Now'
     back_to_products: 'Back to Products'
+  categories:
+    title: "Categories"
+    explore_this_category: "Explore this category"
+    create_new_category: "Create new Category"
+    edit: "Edit"
+  no_categories_found: "No categories found."
+  salons:
+    title: "Salons"
+    explore_this_salons_products: "Explore this salon's products"
+    edit: "Edit"
+    create_new_salon: "Create new salon"
+    no_salons_found: "No salons found."
+  rating:
+    rating: "Rating:"
+
 
   switch_language: "Switch Language: "
   search: "Search"
+
+  search_results: "Search results for \"%{query}\""
+  no_products_found: "No products found."
+  edit: "Edit"
   

@@ -17,13 +17,13 @@
           <% products_slice.each do |product| %>
             <div class="col-md-3">
               <div class="card mb-3">
-                <%= image_tag product.photo_url(:medium), class: "card-img-top", style: "object-fit:cover;" %>
+                <%= image_tag product.photo_url(:medium), class: "card-img-top", height: "450", style: "object-fit:cover;" %>
                 <div class="card-body">
                   <h5 class="card-title"><%= product.name %></h5>
                   <p class="card-text"><%= number_to_currency(product.price) %></p>
                 </div>
                 <div class="card-footer">
-                  <%= link_to "Show this product", product, class: "btn btn-primary" %>
+                  <%= link_to "Show this product", product_path(product), class: "btn btn-primary" %>
                   <% if user_signed_in? %>
                     <% if current_user.admin? %>
                       <%= link_to 'Edit',  edit_admin_product_path(product), class: "btn btn-secondary" %>
@@ -35,6 +35,7 @@
               </div>
             </div>
           <% end %>
+
         </div>
       <% end %>
 

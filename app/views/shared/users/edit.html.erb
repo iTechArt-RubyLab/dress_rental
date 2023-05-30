@@ -1,12 +1,37 @@
-<%= form_for(@user, url: (current_user.admin? ? admin_user_path(@user) : user_path(@user)), method: :put) do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
+<div class="container mt-4">
+  <%= form_for(@user, url: (current_user.admin? ? admin_user_path(@user) : user_path(@user)), method: :put) do |f| %>
+    <div class="mb-3">
+      <%= f.label :first_name, class: "form-label" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
 
-    <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+    <div class="mb-3">
+      <%= f.label :last_name, class: "form-label" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
 
-  <%= f.label :avatar %>
-  <%= f.file_field :avatar %>
+    <div class="mb-3">
+      <%= f.label :address, class: "form-label" %>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
 
-  <%= f.submit 'Update Profile' %>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :phone, class: "form-label" %>
+      <%= f.text_field :phone, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :avatar, class: "form-label" %>
+      <%= f.file_field :avatar, class: "form-control" %>
+    </div>
+
+    <% if current_user.admin? %>
+      <div class="mb-3">
+        <%= f.label :role_type, class: "form-label" %>
+        <%= f.select :role_type, User.role_types.keys.map{ |key| [key.humanize, key] }, {}, class: 'form-control' %>
+      </div>
+    <% end %>
+
+    <%= f.submit "Update Profile", class: "btn btn-primary" %>
+  <% end %>
+</div>

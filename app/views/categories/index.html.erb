@@ -1,29 +1,32 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-6">Categories</h1>
+  <h1 class="text-center mb-6"><%= t('categories.title') %></h1>
   <div class="row justify-content-center">
-    <% @categories.each do |category| %>
-      <div class="col-lg-5 col-md-6 mb-4 mx-3">
-        <div class="card h-100">
-         
-          <div class="card-body">
-            <h4 class="card-title"><%= category.name %></h4>
-            <p class="card-text"><%= category.description %></p>
-          </div>
-          <div class="card-footer d-flex justify-content-between">
-            <%= link_to "Explore this category", category, class: "btn btn-primary" %>
-            <% if current_user&.admin? %>
-              <%= link_to 'Edit',  edit_admin_category_path(category), class: "btn btn-secondary" %>  
-            <% end %>
+    <% if @categories.any? %>
+      <% @categories.each do |category| %>
+        <div class="col-lg-5 col-md-6 mb-4 mx-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title"><%= category.name %></h4>
+              <p class="card-text"><%= category.description %></p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <%= link_to t('categories.explore_this_category'), category, class: "btn btn-primary" %>
+              <% if current_user&.admin? %>
+                <%= link_to t('categories.edit'), edit_admin_category_path(category), class: "btn btn-secondary" %>  
+              <% end %>
+            </div>
           </div>
         </div>
+      <% end %>
+    <% else %>
+      <div class="text-center mb-4"><%= t('no_categories_found') %></div>
+    <% end %>
+  </div>
+  <div class="col-lg-12">
+    <% if current_user&.admin? %>
+      <div class="text-center mb-4">
+        <%= link_to t('categories.create_new_category'), new_admin_category_path, class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
-      <div class="col-lg-12">
-      <% if current_user&.admin? %>
-        <div class="text-center mb-4">
-          <%= link_to 'Create new Category', new_admin_category_path, class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
 </div>

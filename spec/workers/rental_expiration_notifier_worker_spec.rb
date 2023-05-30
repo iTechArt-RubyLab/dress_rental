@@ -4,7 +4,7 @@ RSpec.describe RentalExpirationNotifierWorker, type: :worker do
   it 'sends expiration notification email to expiring rentals' do
     rental1 = create(:rental, :confirmed)
     rental2 = create(:rental, :confirmed)
-    create(:rental) 
+    create(:rental)
 
     expect(ExpiringRentalsSelector).to receive(:call).and_return(Response.new([rental1, rental2]))
 
