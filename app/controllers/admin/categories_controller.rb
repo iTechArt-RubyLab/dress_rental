@@ -9,12 +9,10 @@ module Admin
     def create
       @category = Category.new(category_params)
 
-      respond_to do |format|
-        if @category.save
-          format.html { redirect_to category_path(@category), notice: 'Category was successfully created.' }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-        end
+      if @category.save
+        redirect_to category_path(@category), notice: 'Category was successfully created.'
+      else
+        render :new, status: :unprocessable_entity 
       end
     end
 
@@ -30,20 +28,9 @@ module Admin
     end
 
     def destroy
-      return unless @category.destroy
+      @category.destroy
 
-      respond_to do |format|
-        format.html { redirect_to categories_path, notice: 'Category was successfully destroyed.' }
-      end
-    end
-
-    def destroy
-      if @category.destroy
-        redirect_to categories_path, notice: 'Category was successfully destroyed.'
-      else
-        flash[:alert] = @category.errors.full_messages.join("\n")
-        render :edit
-      end
+      redirect_to categories_path, notice: 'Category was successfully destroyed.'
     end
 
     private
