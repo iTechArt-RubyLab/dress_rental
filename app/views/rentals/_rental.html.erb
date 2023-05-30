@@ -1,24 +1,18 @@
-<p>
-  <strong>Product name:</strong>
-  <%= rental.product.name %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= rental.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= rental.end_date %>
-</p>
-
-<p>
- <strong>Price:</strong>
-    <%= number_to_currency(@rental.total_price) %>
-</p>
-
-<p>
- <strong>Status:</strong>
-    <%= rental.status %>
-</p>
+<div class="container mt-4">
+  <h1 class="text-center mb-6">Rental details</h1>
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-6 mb-4 mx-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title"><%= rental.product.name %></h4>
+          <div class="card-text">
+            <p><strong>Start date:</strong> <%= rental.start_date %></p>
+            <p><strong>End date:</strong> <%= rental.end_date %></p>
+            <p><strong>Price:</strong> <%= number_to_currency(@rental.total_price) %></p>
+            <p><strong>Status:</strong> <%= rental.status %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

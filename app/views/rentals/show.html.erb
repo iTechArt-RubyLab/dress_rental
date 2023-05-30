@@ -1,17 +1,7 @@
-<h1>Current rental</h1>
 
-<%= render @rental %>
-
-<div>
-  <p>
-    <%= link_to "Edit this rental", edit_rental_path(@rental) %>
-  </p>
-
-  <p> 
-    <%= link_to 'Delete this rental', rental_path(@rental), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-  </p>
-
-  <p> 
-    <%= link_to 'Back to rentals', user_path(current_user.id) %>
-  </p>
+  <%= render @rental %>
+<div class="d-flex justify-content-center">   
+    <%= link_to "Edit this rental", edit_rental_path(@rental), class: "btn btn-light" %>
+    <%= link_to 'Delete this rental', rental_path(@rental), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>    
+    <%= link_to 'Back to account', user_path(current_user.id), class: "btn btn-light" %>
 </div>
