@@ -14,9 +14,9 @@ module Owner
     end
 
     def salon_product!
-      unless current_user.salons.joins(:products).where(products: {id: @product.id}).exists?
-        redirect_to root_path, alert: 'Access Denied'
-      end
+      return if current_user.salons.joins(:products).where(products: { id: @product.id }).exists?
+
+      redirect_to root_path, alert: 'Access Denied'
     end
   end
 end

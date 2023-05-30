@@ -15,6 +15,7 @@ class RentalsController < ApplicationController
       redirect_to @rental, notice: 'Request for confirming the rental has been send to the owner.'
     else
       redirect_to new_rental_path, notice: 'Something went wrong Please, try again.'
+      flash[:alert] = @rental.errors.full_messages.join("\n")
     end
   end
 
@@ -73,9 +74,7 @@ class RentalsController < ApplicationController
   def destroy
     return unless @rental.destroy
 
-    respond_to do |format|
-      format.html { redirect_to user_path(current_user), notice: 'Rental was successfully destroyed.' }
-    end
+    redirect_to user_path(current_user), notice: 'Rental was successfully destroyed.'
   end
 
   private

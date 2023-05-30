@@ -13,15 +13,15 @@ module Admin
       @product = @salon.products.build(product_params)
 
       if @product.save
-        redirect_to products_path, notice: 'Product was successfully created.' 
+        redirect_to products_path, notice: 'Product was successfully created.'
       else
-        render :new, status: :unprocessable_entity 
+        render :new, status: :unprocessable_entity
       end
     end
 
     def update
       if @product.update(product_params)
-        redirect_to products_path, notice: 'Product was successfully updated.' 
+        redirect_to products_path, notice: 'Product was successfully updated.'
       else
         render :edit, alert: 'There was an error while updating the product.'
       end
@@ -29,8 +29,8 @@ module Admin
 
     def destroy
       return unless @product.destroy
-      
-      redirect_to products_path, notice: 'Product was successfully destroyed.' 
+
+      redirect_to products_path, notice: 'Product was successfully destroyed.'
     end
 
     private

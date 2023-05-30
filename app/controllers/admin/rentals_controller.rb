@@ -18,9 +18,9 @@ module Admin
     end
 
     def destroy
-      if @rental.destroy
-        redirect_to admin_rentals_path, notice: 'Rental was successfully destroyed' 
-      end
+      return unless @rental.destroy
+
+      redirect_to admin_rentals_path, notice: 'Rental was successfully destroyed'
     end
 
     private

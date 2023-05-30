@@ -9,7 +9,7 @@ FactoryBot.define do
       after(:create) do |product|
         categories = create_list(:category, 3)
         categories.each do |category|
-          create(:product_category, product: product, category: category)
+          create(:product_category, product:, category:)
         end
       end
     end

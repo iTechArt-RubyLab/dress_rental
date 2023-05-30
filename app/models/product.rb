@@ -17,14 +17,14 @@ class Product < ApplicationRecord
   end
 
   def self.search(query)
-    self.__elasticsearch__.search({
-      query: {
-        multi_match: {
-          query: query,
-          fields: [:name, :description]
-        }
-      }
-    })
+    __elasticsearch__.search({
+                               query: {
+                                 multi_match: {
+                                   query:,
+                                   fields: %i[name description]
+                                 }
+                               }
+                             })
   end
 
   def photo_url(_size = :medium)

@@ -27,7 +27,10 @@ RSpec.describe RentalRatingRequestWorker, type: :worker do
   end
 
   it 'does not send rental rating request email if rental does not exist' do
-    expect { RentalRatingRequestWorker.perform_async(rental.id) }.not_to change(RentalRatingRequestWorker.sidekiq_options["retry"], :size)
+    expect do
+      RentalRatingRequestWorker.perform_async(rental.id)
+    end.not_to change(RentalRatingRequestWorker.sidekiq_options['retry'],
+                      :size)
 
     perform_enqueued_jobs do
       RentalRatingRequestWorker.new.perform(0)

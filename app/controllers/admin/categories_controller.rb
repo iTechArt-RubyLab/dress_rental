@@ -12,7 +12,7 @@ module Admin
       if @category.save
         redirect_to category_path(@category), notice: 'Category was successfully created.'
       else
-        render :new, status: :unprocessable_entity 
+        render :new, status: :unprocessable_entity
       end
     end
 

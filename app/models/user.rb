@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :rentals, dependent: :destroy
   has_many :products, through: :rentals
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_one_attached :avatar
   has_many :salons, class_name: 'Salon', foreign_key: 'owner_id', dependent: :destroy
 
@@ -31,8 +31,8 @@ class User < ApplicationRecord
   end
 
   def update_user_rating
-    average_rating = self.rentals.rated_by_owners_rentals.average(:salon_rating)
-    self.update!(rating: average_rating)
+    average_rating = rentals.rated_by_owners_rentals.average(:salon_rating)
+    update!(rating: average_rating)
   end
 
   def avatar_url

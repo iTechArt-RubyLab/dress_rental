@@ -4,6 +4,6 @@ class ProductSearch < Patterns::Service
   end
 
   def call
-    Product.where("name LIKE :query OR description LIKE :query", query: "%#{@query}%")
+    Product.where('name LIKE :query OR description LIKE :query', query: "%#{@query}%")
   end
 end

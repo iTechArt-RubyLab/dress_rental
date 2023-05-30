@@ -7,7 +7,7 @@ module Owner
       @salon = Salon.new
     end
 
-    def index 
+    def index
       @salons = current_user.salons
     end
 
@@ -15,9 +15,9 @@ module Owner
       @salon = Salon.new(salon_params)
 
       if @salon.save
-        redirect_to salon_path(@salon), notice: 'Salon was successfully created.' 
+        redirect_to salon_path(@salon), notice: 'Salon was successfully created.'
       else
-        render :new, status: :unprocessable_entity 
+        render :new, status: :unprocessable_entity
       end
     end
 
@@ -25,15 +25,15 @@ module Owner
 
     def update
       if @salon.update(salon_params)
-        redirect_to salon_path(@salon), notice: 'Salon was successfully updated.' 
+        redirect_to salon_path(@salon), notice: 'Salon was successfully updated.'
       else
-        render :edit, alert: 'Something went wrong. Please try again.' 
+        render :edit, alert: 'Something went wrong. Please try again.'
       end
     end
 
     def destroy
       return unless @salon.destroy
-      
+
       redirect_to salons_path, notice: 'Salon was successfully destroyed.'
     end
 

@@ -7,7 +7,7 @@ FactoryBot.define do
 
     factory :salon_with_products do
       after(:create) do |salon|
-        salon.products << create_list(:product, 3, salon: salon)
+        salon.products << create_list(:product, 3, salon:)
       end
     end
   end

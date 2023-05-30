@@ -10,7 +10,7 @@ FactoryBot.define do
     user_rating { nil }
 
     trait :archived do
-      status { "archived" }
+      status { 'archived' }
     end
 
     trait :expired do

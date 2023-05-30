@@ -10,9 +10,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @salon.comments.find(params[:id])
-    if @comment.destroy
-      redirect_to @salon, notice: 'Comment was successfully destroyed'
-    end
+    return unless @comment.destroy
+
+    redirect_to @salon, notice: 'Comment was successfully destroyed'
   end
 
   def edit
