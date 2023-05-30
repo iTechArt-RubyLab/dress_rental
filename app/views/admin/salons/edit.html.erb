@@ -1,12 +1,12 @@
-<h1>Editing salon</h1>
+<div class="container">
+  <h1 class="text-center mb-5 mt-2">Edit this salon</h1>
 
-<%= render 'form', salon: @salon %>
+  <%= render 'form', salon: @salon %>
 
-<% if current_user&.admin? %>
-  <%= link_to 'Add new product',  new_admin_salon_product_path(@salon) %>
-  <%= link_to 'Destroy', admin_salon_path(@salon), class: "btn btn-danger", data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-<% end %>
-
-<div>
-  <%= link_to "Back to salons", salons_path %>
+  <% if current_user&.admin? %>
+    <%= link_to 'Add new product',  new_admin_salon_product_path(@salon), class: "btn btn-light" %>
+    <%= link_to 'Show this salon', salon_path(@salon), class: "btn btn-light" %>
+    <%= link_to 'Back to salons', salons_path, class: "btn btn-light" %>
+  <% end %>
 </div>
+
