@@ -1,5 +1,3 @@
-# README
-
 # Dress rental service👰🏻‍♀️🤵🏻
 ## Welcome to a wedding dress rental service! This service was specifically developed for customers to explore a range of categories and salons offering various products to cater for all wedding needs and suit all tastes!
 
